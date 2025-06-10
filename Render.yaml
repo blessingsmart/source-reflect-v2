@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: laravel-react-app
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        value: base64:0B1PikfqA7XTcsBLWJX83pxP1RCa9fKz40/k3ZFEnT4=
