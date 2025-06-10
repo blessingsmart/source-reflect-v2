@@ -25,8 +25,8 @@ import SLIDER11 from "../assets/SLIDE11.jpeg";
 import SLIDER12 from "../assets/SLIDE12.jpeg";
 
 export default function Home({}) {
-    const route = useRoute();
-    const { flash } = usePage().props;
+    // const route = useRoute();
+    // const { flash } = usePage().props;
     const { component } = usePage();
 
     const sliderData = [
