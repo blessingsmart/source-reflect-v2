@@ -1,5 +1,6 @@
 import { Head, Link, usePage } from "@inertiajs/react";
-import { useRoute } from 'ziggy-js';
+import GuestLayout from '@/layouts/guest-layout';
+// import { useRoute } from 'ziggy-js';
 import logo from "../assets/logo.png";
 import heroImage from "../assets/heroImage2.png";
 import heroImage1 from "../assets/heroimage.png";
@@ -86,7 +87,7 @@ export default function Home() {
     }, []);
 
     return (
-        <>
+            <GuestLayout>
             <Head title={component} />
             <div className="bg-white">
                 <div className="relative w-screen h-full bg-gradient-to-r from-green-600 to-lime-600">
@@ -314,6 +315,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        </>
+            </GuestLayout>
     );
 }

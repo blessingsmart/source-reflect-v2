@@ -23,6 +23,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install Laravel backend dependencies
 RUN composer install --optimize-autoloader --no-dev
 
+# Create the database directory and file
+RUN mkdir -p /var/www/html/database \
+    && touch /var/www/html/database/database.sqlite \
+    && chmod -R 775 /var/www/html/database
+
+
 # Install frontend dependencies & build assets
 RUN npm install && npm run build
 
