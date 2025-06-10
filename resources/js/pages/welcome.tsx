@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from "@inertiajs/react";
 import { useRoute } from 'ziggy-js';
 import logo from "../assets/logo.png";
-import heroImage from "../assets/heroimage.png";
+import heroImage from "../assets/heroImage2.png";
 import heroImage1 from "../assets/heroimage1.png";
 import { BsArrowRight } from "react-icons/bs";
 import React, { useEffect } from "react";
