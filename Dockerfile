@@ -11,36 +11,24 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy application files
+# Copy all files (including database.sqlite)
 COPY . .
 
-# Copy default Apache config to override DocumentRoot
+# Set Apache to use public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Install Laravel backend dependencies
+# Backend deps
 RUN composer install --optimize-autoloader --no-dev
 
-# Create the database directory and file
-RUN mkdir -p /var/www/html/database \
-    && touch /var/www/html/database/database.sqlite \
-    && chmod -R 775 /var/www/html/database \
-    && chown -R www-data:www-data /var/www/html/database
-
-
-# Run Laravel migrations
-RUN php artisan migrate --force
-
-# Install frontend dependencies & build assets
+# Frontend deps
 RUN npm install && npm run build
 
-# Set permissions
+# Fix permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Expose port
 EXPOSE 80
 
-# Start Apache
 CMD ["apache2-foreground"]
