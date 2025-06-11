@@ -14,6 +14,10 @@ WORKDIR /var/www/html
 # Copy all files (including database.sqlite)
 COPY . .
 
+# Fix permissions for SQLite database
+RUN chmod -R 775 database && chown -R www-data:www-data database
+
+
 # Set Apache to use public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
