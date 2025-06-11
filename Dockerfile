@@ -28,6 +28,8 @@ RUN mkdir -p /var/www/html/database \
     && touch /var/www/html/database/database.sqlite \
     && chmod -R 775 /var/www/html/database
 
+# Run Laravel migrations
+RUN php artisan migrate --force
 
 # Install frontend dependencies & build assets
 RUN npm install && npm run build
