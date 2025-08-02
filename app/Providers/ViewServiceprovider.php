@@ -97,5 +97,6 @@ class ViewServiceProvider extends ServiceProvider
         }
         $view->with('authFollowings', $authFollowings);
       });
+      
   }
 }
