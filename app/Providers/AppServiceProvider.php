@@ -2,6 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
+use App\Models\Like;
+use App\Models\Post;
+use App\Models\PostReport;
+use App\Models\User;
+use App\Observers\CommentObserver;
+use App\Observers\LikeObserver;
+use App\Observers\PostObserver;
+use App\Observers\PostReportObserver;
+use App\Observers\UserObserver;
+use Illuminate\Support\Facades\Blade;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
@@ -22,6 +34,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Post::observe(PostObserver::class);
+      Comment::observe(CommentObserver::class);
+      Like::observe(LikeObserver::class);
+      PostReport::observe(PostReportObserver::class);
+      User::observe(UserObserver::class);
+      
+      Blade::component('partials.postcard', 'postcard');
         if($this->app->environment('production')) {
             URL::forceScheme('https');
         }
