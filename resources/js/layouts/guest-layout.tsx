@@ -1,5 +1,5 @@
 import  Nav  from '@/components/Nav';
-import { NavMain } from '@/components/nav-main';
+import  Hero  from '@/components/Hero';
 import { type BreadcrumbItem } from '@/types';
 import { type ReactNode } from 'react';
 
@@ -11,6 +11,7 @@ interface GuestLayoutProps {
 export default ({ children, breadcrumbs, ...props }: GuestLayoutProps) => (
     <>
     <Nav/>
+    <Hero/>
         {children}
     </>
 );
