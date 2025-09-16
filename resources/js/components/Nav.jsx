@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@inertiajs/react";
 import { FaBars, FaTimes } from "react-icons/fa";
-// import logo from "../assets/logo.png";
+import logo from "../assets/logo.png";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import { Twitter, Linkedin, Phone } from 'lucide-react';
 import { Icon } from "./icon";
@@ -56,8 +56,8 @@ const Nav = () => {
       <div className={`flex justify-between items-center w-full h-20 px-4 sm:px-10 bg-white transition-all duration-500 ${scrolled ? 'shadow-md py-2' : 'shadow-sm py-4'}`}>
         {/* Logo */}
         <Link href="/" className="flex items-center group">
-          {/* <img src={logo} alt="mainlogo" className="w-10 h-10 mr-2 transition-transform duration-300 group-hover:scale-105" /> */}
-          <h1 className="text-lg md:text-xl font-semibold text-blue-950 transition-colors duration-300 group-hover:text-blue-800">SETUDOWN LTD</h1>
+          <img src={logo} alt="mainlogo" className="w-full h-10 mr-2 transition-transform duration-300 group-hover:scale-105" />
+          {/* <h1 className="text-lg md:text-xl font-semibold text-blue-950 transition-colors duration-300 group-hover:text-blue-800">SETUDOWN LTD</h1> */}
         </Link>
 
         {/* Desktop Menu */}

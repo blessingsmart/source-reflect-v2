@@ -4,6 +4,14 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\PostControllerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ServiceController;
+use App\Http\Controllers\Api\TestimonialController;
+use App\Http\Controllers\Api\PartnerController;
+
+Route::get('/services', [ServiceController::class, 'index']);
+Route::get('/testimonials', [TestimonialController::class, 'index']);
+Route::get('/partners', [PartnerController::class, 'index']);
+
 
 /*
 |--------------------------------------------------------------------------
