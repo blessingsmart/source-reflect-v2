@@ -235,7 +235,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <h4 className="mb-1 font-semibold text-gray-900">Call Us</h4>
-                                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                                    <p className="text-gray-600">+234 816 560 8778</p>
                                     <p className="mt-1 text-sm text-gray-500">Mon-Fri from 8am to 6pm</p>
                                 </div>
                             </motion.div>
