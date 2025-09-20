@@ -30,8 +30,15 @@ const fallbackServices = [
     },
 ];
 
+type Service = {
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+};
+
 export default function Services() {
-    const [services, setServices] = useState([]);
+    const [services, setServices] = useState<Service[]>([]);
 
     useEffect(() => {
         // Try to fetch from API, but use fallback if it fails

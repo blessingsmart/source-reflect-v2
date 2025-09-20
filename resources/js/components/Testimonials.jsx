@@ -8,22 +8,22 @@ const fallbackTestimonials = [
         id: 1,
         name: 'Robert Johnson',
         role: 'Relocated to Berlin',
-        message: 'Setudown made our move from the US to Germany completely seamless. Their attention to detail was impressive.',
-        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+        message: 'Setudown made our move from the Ibadan to Lagos completely seamless. Their attention to detail was impressive.',
+        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
     {
         id: 2,
         name: 'Sophia Williams',
         role: 'Corporate Relocation',
         message: "The corporate package was perfect for our team's move. Everything was handled professionally and efficiently.",
-        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
     {
         id: 3,
         name: 'James Chen',
         role: 'Family Relocation',
         message: 'Finding schools and the right neighborhood was our biggest concern. Setudown exceeded our expectations.',
-        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+        avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
 ];
 
