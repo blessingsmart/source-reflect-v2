@@ -1,6 +1,6 @@
 // resources/js/components/Services.jsx
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 // Fallback services data if API is not ready
 const fallbackServices = [
@@ -38,18 +38,8 @@ type Service = {
 };
 
 export default function Services() {
-    const [services, setServices] = useState<Service[]>([]);
-
-    useEffect(() => {
-        // Try to fetch from API, but use fallback if it fails
-        fetch('/api/services')
-            .then((res) => {
-                if (res.ok) return res.json();
-                throw new Error('API not available');
-            })
-            .then((data) => setServices(data))
-            .catch(() => setServices(fallbackServices));
-    }, []);
+    // Use only fallback data; remove API fetch
+    const [services] = useState<Service[]>(fallbackServices);
 
     // Animation variants
     const containerVariants = {
