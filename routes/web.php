@@ -27,6 +27,15 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('About-Us');
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+})->name('Contact-Us');
+Route::get('/services', function () {
+    return Inertia::render('Services');
+})->name('Services');
 
 Route::middleware(['auth',])->group(function () {
     Route::get('dashboard', function () {
