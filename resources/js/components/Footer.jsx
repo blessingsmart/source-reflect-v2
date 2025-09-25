@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { FaInstagram, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer() {
     return (
@@ -47,18 +47,18 @@ export default function Footer() {
                 <div>
                     <h3 className="text-lg font-bold text-white">Connect</h3>
                     <div className="mt-2 flex space-x-4">
-                        <a href="https://www.twitter.com/sourcereflect1" className="hover:text-white">
+                        <a href="https://x.com/setudown1?s=21" className="hover:text-white">
                             <FaTwitter size={30} />
                         </a>
                         <a href="https://wa.me/message/YL3HPLETTPM5O1?src=qr" className="hover:text-white">
                             <FaWhatsapp size={30} />
                         </a>
-                        <a href="https://instagram.com/sourcereflect?igshid=MmIzYWVlNDQ5Yg==" className="hover:text-white">
+                        <a href="https://www.instagram.com/setudown?igsh=MXQ1NGN0N29kbml4MQ%3D%3D&utm_source=qr" className="hover:text-white">
                             <FaInstagram size={30} />
                         </a>
-                        <a href="https://www.facebook.com/sourcereflec?mibextid=LQQJ4d" className="hover:text-white">
+                        {/* <a href="https://www.facebook.com/sourcereflec?mibextid=LQQJ4d" className="hover:text-white">
                             <FaFacebook size={30} />
-                        </a>
+                        </a> */}
                     </div>
                 </div>
             </div>

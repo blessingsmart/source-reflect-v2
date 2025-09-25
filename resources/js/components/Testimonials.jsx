@@ -1,92 +1,52 @@
-// resources/js/components/Testimonials.jsx
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 
-// Fallback testimonials data
-const fallbackTestimonials = [
+const testimonials = [
     {
         id: 1,
-        name: 'Robert Johnson',
-        role: 'Relocated to Berlin',
-        message: 'Setudown made our move from the Ibadan to Lagos completely seamless. Their attention to detail was impressive.',
+        name: 'Ada',
+        role: 'Returned from UK',
+        message: 'Setu Down made my Lagos move so smooth, I forgot I was moving countries.',
         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
     {
         id: 2,
-        name: 'Sophia Williams',
-        role: 'Corporate Relocation',
-        message: "The corporate package was perfect for our team's move. Everything was handled professionally and efficiently.",
+        name: 'John',
+        role: 'Shell Nigeria expat',
+        message: 'Everything from school tours to security orientation was handled. Worth every dollar.',
         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
     {
         id: 3,
-        name: 'James Chen',
-        role: 'Family Relocation',
-        message: 'Finding schools and the right neighborhood was our biggest concern. Setudown exceeded our expectations.',
+        name: 'Chiamaka',
+        role: 'Diaspora returnee from Canada',
+        message: 'The cultural orientation saved me from so many embarrassing moments. They thought me how to be Nigerian again!',
         avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAj1ZyVhinZkuUe_ddZzSUAbm9saIe4jIYyQ&s',
     },
 ];
 
 export default function Testimonials() {
-    const [testimonials, setTestimonials] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    useEffect(() => {
-        // Try to fetch from API, but use fallback if it fails
-        fetch('/api/testimonials')
-            .then((res) => {
-                if (res.ok) return res.json();
-                throw new Error('API not available');
-            })
-            .then((data) => setTestimonials(data))
-            .catch(() => setTestimonials(fallbackTestimonials));
-    }, []);
-
-    // Animation variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-            y: 0,
-            opacity: 1,
-            transition: {
-                duration: 0.5,
-            },
-        },
-    };
-
     return (
-        <section id="testimonials" className="bg-white py-20">
+        <section id="testimonials" className="bg-gray-50 py-20">
             <div className="mx-auto max-w-7xl px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">What Our Clients Say</h2>
-                    <p className="mx-auto max-w-3xl text-xl text-gray-600">Hear from people who have experienced our relocation services firsthand</p>
+                    <h2 className="mb-4 text-4xl font-bold text-gray-900">They Landed with Luggage. We Handled the Rest.</h2>
                 </motion.div>
 
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-100px' }}
-                    className="grid grid-cols-1 gap-8 md:grid-cols-3"
-                >
-                    {testimonials.map((t) => (
-                        <motion.div key={t.id} variants={itemVariants} className="rounded-xl bg-gray-50 p-8 shadow-lg transition-all hover:shadow-xl">
+                <div className="mb-12 grid gap-8 md:grid-cols-3">
+                    {testimonials.map((t, index) => (
+                        <motion.div
+                            key={t.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="rounded-xl bg-white p-8 shadow-lg transition-all hover:shadow-xl"
+                        >
                             <div className="mb-6 flex items-center">
                                 <img src={t.avatar} alt={t.name} className="mr-4 h-14 w-14 rounded-full object-cover" />
                                 <div>
@@ -104,6 +64,25 @@ export default function Testimonials() {
                             </div>
                         </motion.div>
                     ))}
+                </div>
+
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
+                    <div className="flex flex-col justify-center gap-4 sm:flex-row">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+                        >
+                            Read More Reviews
+                        </motion.button>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-green-600 hover:text-white"
+                        >
+                            Share Your Story
+                        </motion.button>
+                    </div>
                 </motion.div>
             </div>
         </section>

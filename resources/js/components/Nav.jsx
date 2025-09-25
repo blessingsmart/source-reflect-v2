@@ -42,12 +42,12 @@ const Nav = () => {
             {/* Top info bar */}
             <div className="flex h-10 items-center gap-3 bg-blue-950 px-4 text-gray-300 transition-all duration-300 sm:px-10">
                 <div className="flex items-center gap-4">
-                    <a href="#" className="transition-colors duration-300 hover:text-white">
+                    <a href="https://x.com/setudown1?s=21" className="transition-colors duration-300 hover:text-white">
                         <Icon iconNode={Twitter} className="size-4" />
                     </a>
-                    <a href="#" className="transition-colors duration-300 hover:text-white">
+                    {/* <a href="#" className="transition-colors duration-300 hover:text-white">
                         <Icon iconNode={Linkedin} className="size-4" />
-                    </a>
+                    </a> */}
                 </div>
                 <h2 className="ml-2 text-xs md:text-sm">Welcome to Setudown</h2>
             </div>
