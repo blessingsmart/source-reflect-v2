@@ -23,10 +23,10 @@ export default function PainPoints() {
                         >
                             <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-red-100 opacity-20"></div>
                             <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-red-600">
+                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600">
                                     <span className="text-2xl">🏠</span>
                                 </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-red-600">You don't know where to live.</h3>
+                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know where to live.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     Safe neighborhoods, commute times, family-friendly areas...
                                 </p>
@@ -40,10 +40,10 @@ export default function PainPoints() {
                         >
                             <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-orange-100 opacity-20"></div>
                             <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-orange-600">
+                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-900">
                                     <span className="text-2xl">🤝</span>
                                 </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-orange-600">You don't know who to trust.</h3>
+                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-blue-900">You don't know who to trust.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     Real estate agents, service providers, local contacts...
                                 </p>
@@ -57,10 +57,10 @@ export default function PainPoints() {
                         >
                             <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-purple-100 opacity-20"></div>
                             <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 to-purple-600">
+                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600">
                                     <span className="text-2xl">❓</span>
                                 </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-purple-600">You don't know what you don't know.</h3>
+                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know what you don't know.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                                     Cultural norms, safety tips, local customs, hidden costs...
                                 </p>

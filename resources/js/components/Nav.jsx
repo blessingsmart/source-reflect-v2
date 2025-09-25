@@ -94,7 +94,7 @@ const Nav = () => {
                 </ul>
 
                 {/* Contact button */}
-                <button className="group hidden items-center justify-center gap-2 rounded-md bg-green-500 px-4 py-2.5 text-white transition-all duration-300 hover:bg-blue-700 md:flex">
+                <button className="group hidden items-center justify-center gap-2 rounded-md bg-green-500 px-4 py-2.5 text-white transition-all duration-300 hover:bg-blue-950 md:flex">
                     <Icon iconNode={Phone} className="size-5 transition-transform duration-300 group-hover:scale-110" />
                     <div className="flex flex-col items-start text-sm">
                         <span className="font-medium">Contact Us</span>
