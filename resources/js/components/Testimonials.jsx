@@ -75,13 +75,16 @@ export default function Testimonials() {
                         >
                             Read More Reviews
                         </motion.button>
-                        <motion.button
+                        <motion.a
+                            href="https://wa.me/message/YL3HPLETTPM5O1?"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-green-600 hover:text-white"
                         >
                             Share Your Story
-                        </motion.button>
+                        </motion.a>
                     </div>
                 </motion.div>
             </div>

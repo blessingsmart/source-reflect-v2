@@ -123,26 +123,28 @@ export default function PainPoints() {
 
                     {/* CTA Button */}
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-16">
-                        <motion.button
-                            whileHover={{
-                                scale: 1.05,
-                                boxShadow: '0 20px 40px rgba(5, 150, 105, 0.3)',
-                            }}
-                            whileTap={{ scale: 0.95 }}
-                            className="hover:shadow-3xl rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 px-12 py-4 font-bold text-white shadow-2xl transition-all duration-300"
-                        >
-                            <span className="flex items-center justify-center gap-3">
-                                Let's Talk — Book Free Discovery Call
-                                <svg
-                                    className="h-5 w-5 transition-transform group-hover:translate-x-1"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
-                            </span>
-                        </motion.button>
+                        <a href="https://calendly.com/bublessingsmart/30min" target="_blank" rel="noopener noreferrer">
+                            <motion.button
+                                whileHover={{
+                                    scale: 1.05,
+                                    boxShadow: '0 20px 40px rgba(5, 150, 105, 0.3)',
+                                }}
+                                whileTap={{ scale: 0.95 }}
+                                className="hover:shadow-3xl rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 px-12 py-4 font-bold text-white shadow-2xl transition-all duration-300"
+                            >
+                                <span className="flex items-center justify-center gap-3">
+                                    Let's Talk — Book Free Discovery Call
+                                    <svg
+                                        className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </span>
+                            </motion.button>
+                        </a>
                         <p className="mt-4 text-sm text-gray-500">No obligation • 30-minute consultation • Get personalized advice</p>
                     </motion.div>
                 </motion.div>

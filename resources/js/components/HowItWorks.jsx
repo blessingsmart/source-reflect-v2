@@ -63,13 +63,16 @@ export default function HowItWorks() {
                     transition={{ delay: 0.5 }}
                     className="mt-12 text-center"
                 >
-                    <motion.button
+                    <motion.a
+                        href="https://wa.me/message/YL3HPLETTPM5O1?"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
                     >
                         Start My Move
-                    </motion.button>
+                    </motion.a>
                 </motion.div>
             </div>
         </section>

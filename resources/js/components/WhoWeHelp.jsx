@@ -74,13 +74,16 @@ export default function WhoWeHelp() {
                     <p className="mb-4 text-xl text-gray-800 italic">
                         "You can Google everything and still get everything wrong. We help you get it right the first time."
                     </p>
-                    <motion.button
+                    <motion.a
+                        href="https://wa.me/message/YL3HPLETTPM5O1?"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
                     >
                         Get It Right The First Time
-                    </motion.button>
+                    </motion.a>
                 </motion.div>
             </div>
         </section>

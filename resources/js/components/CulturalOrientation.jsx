@@ -66,13 +66,16 @@ export default function CulturalOrientation() {
                 </div>
 
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-                    <motion.button
+                    <motion.a
+                        href="https://calendly.com/bublessingsmart/30min"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
                     >
                         Book Cultural Session
-                    </motion.button>
+                    </motion.a>
                 </motion.div>
             </div>
         </section>

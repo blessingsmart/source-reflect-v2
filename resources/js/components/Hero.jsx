@@ -1,5 +1,6 @@
 // resources/js/components/Hero.jsx
 import { motion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
 
 const Hero = () => {
     return (
@@ -39,20 +40,25 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="flex flex-col justify-center gap-4 sm:flex-row"
                 >
-                    <motion.button
+                    <motion.a
+                        href="https://wa.me/message/YL3HPLETTPM5O1?"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="group flex items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-white transition-all duration-300 hover:bg-green-700"
+                        className="group flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-white transition-all duration-300 hover:bg-green-700"
                     >
                         Get Started
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group flex items-center justify-center gap-2 rounded-lg border-2 border-white px-6 py-3 text-white transition-all duration-300 hover:bg-white hover:text-green-900"
-                    >
-                        See Our Packages
-                    </motion.button>
+                    </motion.a>
+                    <Link href="#packages">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex items-center justify-center gap-2 rounded-lg border-2 border-white px-6 py-3 text-white transition-all duration-300 hover:bg-white hover:text-green-900"
+                        >
+                            See Our Packages
+                        </motion.button>
+                    </Link>
                 </motion.div>
             </div>
         </section>
