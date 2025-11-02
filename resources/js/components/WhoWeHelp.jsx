@@ -75,7 +75,7 @@ export default function WhoWeHelp() {
                         "You can Google everything and still get everything wrong. We help you get it right the first time."
                     </p>
                     <motion.a
-                        href="https://wa.me/message/YL3HPLETTPM5O1?"
+                        href="http://wa.me/2348165608778"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}

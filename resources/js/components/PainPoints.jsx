@@ -123,7 +123,7 @@ export default function PainPoints() {
 
                     {/* CTA Button */}
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-16">
-                        <a href="https://calendly.com/bublessingsmart/30min" target="_blank" rel="noopener noreferrer">
+                        <a href="https://calendly.com/inquiries-setudown/30min" target="_blank" rel="noopener noreferrer">
                             <motion.button
                                 whileHover={{
                                     scale: 1.05,

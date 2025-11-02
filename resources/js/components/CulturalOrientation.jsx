@@ -67,7 +67,7 @@ export default function CulturalOrientation() {
 
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
                     <motion.a
-                        href="https://calendly.com/bublessingsmart/30min"
+                        href="https://calendly.com/inquiries-setudown/30min"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}

@@ -50,7 +50,7 @@ export default function Footer() {
                         <a href="https://x.com/setudown1?s=21" className="hover:text-white">
                             <FaTwitter size={30} />
                         </a>
-                        <a href="https://wa.me/message/YL3HPLETTPM5O1?src=qr" className="hover:text-white">
+                        <a href="http://wa.me/2348165608778src=qr" className="hover:text-white">
                             <FaWhatsapp size={30} />
                         </a>
                         <a href="https://www.instagram.com/setudown?igsh=MXQ1NGN0N29kbml4MQ%3D%3D&utm_source=qr" className="hover:text-white">

@@ -64,7 +64,7 @@ export default function HowItWorks() {
                     className="mt-12 text-center"
                 >
                     <motion.a
-                        href="https://wa.me/message/YL3HPLETTPM5O1?"
+                        href="http://wa.me/2348165608778"
                         target="_blank"
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.05 }}

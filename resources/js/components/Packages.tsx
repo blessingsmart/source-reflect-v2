@@ -81,7 +81,7 @@ export default function Packages() {
                                     </li>
                                 ))}
                             </ul>
-                            <a href="https://wa.me/message/YL3HPLETTPM5O1?" target="_blank" rel="noopener noreferrer">
+                            <a href="http://wa.me/2348165608778" target="_blank" rel="noopener noreferrer">
                                 <button className="w-full rounded-lg bg-green-600 py-2 text-white transition-colors hover:bg-green-700">
                                     Get Started
                                 </button>
@@ -103,7 +103,7 @@ export default function Packages() {
                         </button>
                         <a
                             className="rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-green-600 hover:text-white"
-                            href="https://wa.me/message/YL3HPLETTPM5O1?"
+                            href="http://wa.me/2348165608778"
                             target="_blank"
                             rel="noopener noreferrer"
                         >

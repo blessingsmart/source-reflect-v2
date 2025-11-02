@@ -76,7 +76,7 @@ export default function Testimonials() {
                             Read More Reviews
                         </motion.button>
                         <motion.a
-                            href="https://wa.me/message/YL3HPLETTPM5O1?"
+                            href="http://wa.me/2348165608778"
                             target="_blank"
                             rel="noopener noreferrer"
                             whileHover={{ scale: 1.05 }}
