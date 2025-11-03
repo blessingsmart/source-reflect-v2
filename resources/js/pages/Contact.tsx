@@ -217,7 +217,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <h4 className="mb-1 font-semibold text-gray-900">Email Us</h4>
-                                    <p className="text-gray-600">info@setudown.com</p>
+                                    <p className="text-gray-600">inquiries@setudown.com</p>
                                     <p className="mt-1 text-sm text-gray-500">We'll respond within 24 hours</p>
                                 </div>
                             </motion.div>
@@ -280,13 +280,16 @@ export default function Contact() {
                             <motion.div variants={fadeIn} className="rounded-xl bg-gradient-to-r from-blue-950 to-blue-700 p-6 text-white">
                                 <h4 className="mb-3 text-xl font-semibold">Prefer a Virtual Meeting?</h4>
                                 <p className="mb-4">Schedule a video consultation at your convenience</p>
-                                <motion.button
+                                <motion.a
+                                    href="https://calendly.com/inquiries-setudown/30min"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     className="rounded-lg bg-white px-6 py-2 font-semibold text-blue-950"
                                 >
                                     Schedule a Call
-                                </motion.button>
+                                </motion.a>
                             </motion.div>
                         </motion.div>
                     </div>
