@@ -43,6 +43,10 @@ Route::middleware(['auth',])->group(function () {
     })->name('dashboard');
 });
 
+Route::get('/health-check', function () {
+    return response()->json(['status' => 'ok', 'timestamp' => now()]);
+});
+
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
 
