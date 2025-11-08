@@ -33,7 +33,7 @@ const Nav = () => {
         { id: 1, href: '/', title: 'Home' },
         { id: 2, href: '/about', title: 'About Us' },
         { id: 4, href: '/services', title: 'Services' },
-        { id: 5, href: '/', title: 'Blog' },
+        { id: 5, href: '/blog', title: 'Blog' },
         { id: 6, href: '/contact', title: 'Contact' },
     ];
 
