@@ -36,24 +36,25 @@
                 </div>
 
                 <!-- Sort Dropdown -->
-                <div class="flex items-center gap-3 w-full md:w-auto">
+                <form method="GET" action="{{ route('blog') }}" class="flex items-center gap-3 w-full md:w-auto">
                     <label for="sort" class="text-gray-700 font-medium whitespace-nowrap">Sort by:</label>
                     <div class="relative flex-1 md:w-48">
                         <select id="sort" name="sort" 
-                                class="w-full appearance-none bg-white border border-gray-300 rounded-lg px-4 py-3 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer">
-                            <option value="latest">Latest</option>
-                            <option value="oldest">Oldest</option>
-                            <option value="mostliked">Most Liked</option>
-                            <option value="mostviewed">Most Viewed</option>
-                            <option value="followings">Following</option>
-                            <option value="featured">Featured</option>
-                            <option value="hashtagtrend">Hashtag Trend</option>
+                                class="w-full appearance-none bg-white border border-gray-300 rounded-lg px-4 py-3 pr-10 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 cursor-pointer"
+                                onchange="this.form.submit()">
+                            <option value="latest" {{ $sorts == 'latest' ? 'selected' : '' }}>Latest</option>
+                            <option value="oldest" {{ $sorts == 'oldest' ? 'selected' : '' }}>Oldest</option>
+                            <option value="mostliked" {{ $sorts == 'mostliked' ? 'selected' : '' }}>Most Liked</option>
+                            <option value="mostviewed" {{ $sorts == 'mostviewed' ? 'selected' : '' }}>Most Viewed</option>
+                            <option value="followings" {{ $sorts == 'followings' ? 'selected' : '' }}>Following</option>
+                            <option value="featured" {{ $sorts == 'featured' ? 'selected' : '' }}>Featured</option>
+                            <option value="hashtagtrend" {{ $sorts == 'hashtagtrend' ? 'selected' : '' }}>Hashtag Trend</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-600">
                             <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -68,174 +69,133 @@
             </div>
             
             <div id="tagsContainer" class="flex flex-wrap gap-3 transition-all duration-500 overflow-hidden max-h-20">
-                <span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-indigo-200 transition-colors cursor-pointer">Technology (42)</span>
-                <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-200 transition-colors cursor-pointer">Design (28)</span>
-                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-green-200 transition-colors cursor-pointer">Productivity (35)</span>
-                <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-yellow-200 transition-colors cursor-pointer">Business (22)</span>
-                <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-red-200 transition-colors cursor-pointer">Health (19)</span>
-                <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors cursor-pointer">Travel (15)</span>
-                <span class="bg-pink-100 text-pink-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-pink-200 transition-colors cursor-pointer">Lifestyle (31)</span>
-                <span class="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition-colors cursor-pointer">Programming (47)</span>
+                @forelse($tags as $tag)
+                    <span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium hover:bg-indigo-200 transition-colors cursor-pointer">
+                        {{ $tag->name }} ({{ $tag->posts_count }})
+                    </span>
+                @empty
+                    <p class="text-gray-500">No tags available</p>
+                @endforelse
             </div>
         </div>
 
         <hr class="my-8 border-gray-200">
 
         <!-- Posts Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Post Card 1 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover fade-in">
-                <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 relative">
-                    <span class="absolute top-4 left-4 bg-white/90 text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">TECHNOLOGY</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-clock"></i>
-                            May 15, 2023
-                        </span>
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-eye"></i>
-                            1.2k
-                        </span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">The Future of Artificial Intelligence in Everyday Life</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3">Exploring how AI is transforming our daily routines and what to expect in the coming years with advanced machine learning algorithms.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-semibold text-sm mr-3">
-                                S
+        @if($posts->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($posts as $post)
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover fade-in">
+                        <!-- Post Image -->
+                        <div class="h-48 bg-gradient-to-r from-blue-400 to-purple-500 relative">
+                            @if($post->image)
+                                <img src="{{ asset('storage/uploads/' . $post->image) }}" 
+                                     alt="{{ $post->title }}" 
+                                     class="w-full h-full object-cover">
+                            @endif
+                            <!-- Hashtags -->
+                            @if($post->hashtags->count() > 0)
+                                <span class="absolute top-4 left-4 bg-white/90 text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                    {{ $post->hashtags->first()->name }}
+                                </span>
+                            @endif
+                        </div>
+                        
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs text-gray-500 flex items-center gap-1">
+                                    <i class="far fa-clock"></i>
+                                    {{ $post->created_at->format('M j, Y') }}
+                                </span>
+                                <span class="text-xs text-gray-500 flex items-center gap-1">
+                                    <i class="far fa-eye"></i>
+                                    {{ $post->views_count ?? 0 }}
+                                </span>
                             </div>
-                            <span class="text-sm text-gray-700 font-medium">Sarah Johnson</span>
-                        </div>
-                        <div class="flex items-center space-x-4 text-gray-500">
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-heart"></i>
-                                <span>42</span>
-                            </span>
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-comment"></i>
-                                <span>12</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Post Card 2 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover fade-in">
-                <div class="h-48 bg-gradient-to-r from-green-400 to-blue-500 relative">
-                    <span class="absolute top-4 left-4 bg-white/90 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">PRODUCTIVITY</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-clock"></i>
-                            May 12, 2023
-                        </span>
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-eye"></i>
-                            894
-                        </span>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">10 Habits That Will Transform Your Workday</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3">Simple yet effective strategies to boost your productivity and achieve more in less time with proven techniques.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-gradient-to-r from-green-500 to-blue-500 flex items-center justify-center text-white font-semibold text-sm mr-3">
-                                M
+                            
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                                <a href="{{ route('single.post', $post->slug) }}" class="hover:text-indigo-600 transition-colors">
+                                    {{ $post->title }}
+                                </a>
+                            </h3>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-3">
+                                {{ Str::limit(strip_tags($post->content), 120) }}
+                            </p>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    @if($post->user->avatar)
+                                        <img src="{{ asset('storage/avatars/' . $post->user->avatar) }}" 
+                                             alt="{{ $post->user->username }}" 
+                                             class="h-8 w-8 rounded-full object-cover mr-3">
+                                    @else
+                                        <div class="h-8 w-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-semibold text-sm mr-3">
+                                            {{ substr($post->user->username, 0, 1) }}
+                                        </div>
+                                    @endif
+                                    <span class="text-sm text-gray-700 font-medium">{{ $post->user->username }}</span>
+                                </div>
+                                <div class="flex items-center space-x-4 text-gray-500">
+                                    <span class="flex items-center text-sm gap-1">
+                                        <i class="far fa-heart"></i>
+                                        <span>{{ $post->likes_count }}</span>
+                                    </span>
+                                    <span class="flex items-center text-sm gap-1">
+                                        <i class="far fa-comment"></i>
+                                        <span>{{ $post->totalcomments_count }}</span>
+                                    </span>
+                                </div>
                             </div>
-                            <span class="text-sm text-gray-700 font-medium">Michael Chen</span>
-                        </div>
-                        <div class="flex items-center space-x-4 text-gray-500">
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-heart"></i>
-                                <span>28</span>
-                            </span>
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-comment"></i>
-                                <span>7</span>
-                            </span>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            
-            <!-- Post Card 3 -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover fade-in">
-                <div class="h-48 bg-gradient-to-r from-purple-400 to-pink-500 relative">
-                    <span class="absolute top-4 left-4 bg-white/90 text-purple-600 text-xs font-semibold px-3 py-1 rounded-full">DESIGN</span>
-                </div>
-                <div class="p-6">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-clock"></i>
-                            May 10, 2023
-                        </span>
-                        <span class="text-xs text-gray-500 flex items-center gap-1">
-                            <i class="far fa-eye"></i>
-                            1.5k
-                        </span>
+        @else
+            <!-- No Posts State -->
+            <div class="text-center py-16">
+                <div class="max-w-md mx-auto">
+                    <div class="h-32 w-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="far fa-file-alt text-gray-400 text-4xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">Minimalism in Web Design: Less is More</h3>
-                    <p class="text-gray-600 mb-4 line-clamp-3">How embracing simplicity can lead to more effective and beautiful digital experiences that users love.</p>
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm mr-3">
-                                A
-                            </div>
-                            <span class="text-sm text-gray-700 font-medium">Alex Rivera</span>
-                        </div>
-                        <div class="flex items-center space-x-4 text-gray-500">
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-heart"></i>
-                                <span>35</span>
-                            </span>
-                            <span class="flex items-center text-sm gap-1">
-                                <i class="far fa-comment"></i>
-                                <span>9</span>
-                            </span>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-3">No Posts Yet</h3>
+                    <p class="text-gray-500 mb-6">Be the first to share your thoughts and start a conversation.</p>
+                    @auth
+                        <a href="{{ route('createpage') }}" class="btn-primary text-white px-6 py-3 rounded-lg font-medium inline-block">
+                            Create First Post
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-primary text-white px-6 py-3 rounded-lg font-medium inline-block">
+                            Login to Create Post
+                        </a>
+                    @endauth
                 </div>
             </div>
-        </div>
-
-        <!-- No Posts State -->
-        <div class="text-center py-16 hidden">
-            <div class="max-w-md mx-auto">
-                <div class="h-32 w-32 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="far fa-file-alt text-gray-400 text-4xl"></i>
-                </div>
-                <h3 class="text-2xl font-semibold text-gray-700 mb-3">No Posts Yet</h3>
-                <p class="text-gray-500 mb-6">Be the first to share your thoughts and start a conversation.</p>
-                <button class="btn-primary text-white px-6 py-3 rounded-lg font-medium">
-                    Create First Post
-                </button>
-            </div>
-        </div>
+        @endif
 
         <!-- Pagination -->
-        <div class="flex justify-center mt-12">
-            <div class="flex items-center gap-2 bg-white rounded-lg shadow-sm border border-gray-100 p-2">
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg bg-indigo-600 text-white font-medium">1</button>
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">2</button>
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">3</button>
-                <span class="px-2 text-gray-500">...</span>
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg text-gray-700 hover:bg-gray-100 transition-colors">8</button>
-                <button class="h-10 w-10 flex items-center justify-center rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+        @if($posts->count() > 0)
+            <div class="flex justify-center mt-12">
+                <div class="flex items-center gap-2 bg-white rounded-lg shadow-sm border border-gray-100 p-2">
+                    {{ $posts->links() }}
+                </div>
+            </div>
+        @endif
+    </main>
+
+    <!-- Flash Message -->
+    @if(session('success'))
+        <div class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 fade-in-out">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i>
+                <span>{{ session('success') }}</span>
             </div>
         </div>
-    </main>
+    @endif
 
     <script>
         // Toggle tags visibility
-        document.getElementById('toggleTags').addEventListener('click', function() {
+        document.getElementById('toggleTags')?.addEventListener('click', function() {
             const tagsContainer = document.getElementById('tagsContainer');
             const buttonText = this.querySelector('span');
             const icon = this.querySelector('i');
@@ -255,12 +215,17 @@
             }
         });
 
-        // Sort functionality
-        document.getElementById('sort').addEventListener('change', function() {
-            // In a real application, this would submit the form or make an API call
-            console.log('Sort by:', this.value);
-        });
+        // Auto-hide flash message
+        @if(session('success'))
+            setTimeout(() => {
+                const flashMessage = document.querySelector('.fade-in-out');
+                if (flashMessage) {
+                    flashMessage.style.opacity = '0';
+                    flashMessage.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => flashMessage.remove(), 500);
+                }
+            }, 3000);
+        @endif
     </script>
 </body>
-
 </x-layout>

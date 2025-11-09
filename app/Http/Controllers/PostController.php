@@ -53,27 +53,25 @@ class PostController extends Controller
     ]);
   }
 
-
-  public function create(CreatePostRequest $request,PostService $service)
-  {
+ public function create(CreatePostRequest $request, PostService $service)
+{
     $dto = CreatePostDTO::fromAppRequest($request);
     $service->create($dto);
-    toastr()->success('posted successfuly',['timeOut'=>1000]);
-
+    
+    session()->flash('success', 'Posted successfully');
+    
     return redirect('/blog');
-  }
+}
 
   public function delete($slug)
-  {
-
-    $post = Post::whereSlug( $slug)->firstOrFail();
+{
+    $post = Post::whereSlug($slug)->firstOrFail();
     $this->authorize('delete', $post);
     $post->delete();
     
-      toastr()->success('Post deleted successfully',['timeOut'=>1000]);
-      return redirect('/blog');
-    
-  }
+    session()->flash('success', 'Post deleted successfully');
+    return redirect('/blog');
+}
   public function editpost($slug)
   {
     $post = Post::whereSlug( $slug)->firstOrFail();
@@ -89,16 +87,16 @@ class PostController extends Controller
     ]);
   }
 
-  public function update($slug, UpdatePostRequest $request,PostService $service)
-  {
-    $post = Post::whereSlug( $slug)->firstOrFail();
+  public function update($slug, UpdatePostRequest $request, PostService $service)
+{
+    $post = Post::whereSlug($slug)->firstOrFail();
     $this->authorize('update', $post);
     $dto = UpdatePostDTO::fromAppRequest($request);
-    $service->update($post,$dto);
+    $service->update($post, $dto);
 
-    toastr()->success('Post updated successfully',['timeOut'=>1000]);
+    session()->flash('success', 'Post updated successfully');
     return redirect('/blog');
-  }
+}
 
   public function like(Post $post)
   {
