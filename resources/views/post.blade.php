@@ -29,10 +29,10 @@
     <div class="ml-5 mt-4 flex justify-center items-center md:text-sm text-xs">
       <span class="flex justify-center items-center  font-semibold gap-2">
         
-  <a href='{{route('profile',$post->user->username)}}'>
+  {{-- <a href='{{route('profile',$post->user)}}'>
     <img src="{{$post->user->avatar_url}}"  class="w-[40px] h-[40px] overflow-hidden flex justify-center items-center  shrink-0 grow-0 rounded-full">
     </a>
-        <a href="{{route('profile',$post->user->username)}}" class="hover:underline">{{$post->user->username}}</a>
+        <a href="{{route('profile',$post->user)}}" class="hover:underline">{{$post->user->username}}</a>
       </span>
       
       &nbsp;&nbsp;
@@ -44,7 +44,7 @@
         </span>
          {{$post->updated_at->diffForHumans()}}
       </span>
-    </div>
+    </div> --}}
   
 </div>
 
@@ -123,12 +123,12 @@
   @foreach($morearticles as $article)
 <div class="rounded-lg p-3 border-2 mx-auto md:mx-0 w-[400px] md:w-[500px] h-fit flex flex-col ">
 <div class="flex gap-2 items-center">
-  <a href='{{route('profile',$article->user->username)}}'>
+  {{-- <a href='{{route('profile',$article->user->username)}}'>
     <img loading="lazy" src="{{$article->user->avatar_url}}"  class="w-[40px] h-[40px] overflow-hidden flex justify-center items-center  shrink-0 grow-0 rounded-full">
-    </a>
-    <a href='{{route('profile',$article->user->username)}}' class="hover:underline">
+    </a> --}}
+    {{-- <a href='{{route('profile',$article->user->username)}}' class="hover:underline">
       {{$article->user->username}}
-    </a>
+    </a> --}}
 </div>
 <a href="{{route('single.post',$article->slug)}}">
 <img src="/storage/uploads/{{$article->image_path}}"  alt="" class="w-full h-[270px] object-cover mt-2 rounded-lg">
