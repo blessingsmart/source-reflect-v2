@@ -60,12 +60,12 @@
 <title>@yield('meta_title',config('app.name').'- The platform that let users connect with each others and share their ideas .')</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-<link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" />
+{{-- <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" /> --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<link rel="stylesheet" href="{{url('style.css')}}">
-<link rel="stylesheet" href="{{url('tinymce.css')}}">
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- <link rel="stylesheet" href="{{url('style.css')}}"> --}}
+{{-- <link rel="stylesheet" href="{{url('tinymce.css')}}"> --}}
+@vite(['resources/css/app.css', 'resources/js/app.tsx'])
 @stack('styles')
 
     <style>
