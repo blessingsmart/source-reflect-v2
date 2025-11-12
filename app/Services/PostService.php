@@ -3,44 +3,75 @@
 namespace App\Services;
 
 use App\DTOs\CreatePostDTO;
-use App\DTOs\UpdatePostDTO;
 use App\Models\Post;
-use Illuminate\Support\Str;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Str;
 
 class PostService
 {
-  use ImageUploadTrait;
-    public function __construct(protected PostHashtagsService $tagservice){}
+    use ImageUploadTrait;
 
     public function create(CreatePostDTO $dto): Post
     {
-        $imageslug = Str::slug($dto->title);
-        $newimage = $this->uploadImage($dto->image, $imageslug);
+        // Generate slug from title
+        $slug = Str::slug($dto->title);
+        
+        // Upload image if provided
+        $imagePath = null;
+        if ($dto->image) {
+            $imagePath = $this->uploadImage($dto->image, $slug);
+        }
 
+        // Create the post
         $post = Post::create([
             'title' => $dto->title,
             'description' => $dto->description,
-            'image_path' => $newimage,
-            'allow_comments' => $dto->allowComments,
-            'user_id' => $dto->userId,
-            'is_featured' => $dto->isFeatured
+            'slug' => $slug,
+            'image_path' => $imagePath,
+            'user_id' => auth()->id(),
+            'allow_comments' => $dto->allow_comments ?? true,
         ]);
-        if($dto->hashtags){
-          $this->tagservice->attachhashtags($post,$dto->hashtags);
+
+        // Sync hashtags if provided
+        if ($dto->hashtags) {
+            $post->syncHashtags($dto->hashtags);
         }
+
         return $post;
     }
 
-    public function update(Post $post,UpdatePostDTO $dto): Post
+    public function update(Post $post, UpdatePostDTO $dto): Post
     {
-      $post->update([
-        'title' => $dto->title,
-        'description' => $dto->description,
-        'allow_comments' => $dto->allowComments,
-        'is_featured' => $dto->isFeatured
-    ]);
-        $this->tagservice->syncHashtags($post, $dto->hashtags);
-       return $post;
+        // Generate new slug if title changed
+        $slug = $post->slug;
+        if ($dto->title !== $post->title) {
+            $slug = Str::slug($dto->title);
+        }
+
+        // Upload new image if provided
+        $imagePath = $post->image_path;
+        if ($dto->image) {
+            // Delete old image
+            if ($post->image_path) {
+                Storage::disk('public')->delete("uploads/{$post->image_path}");
+            }
+            $imagePath = $this->uploadImage($dto->image, $slug);
+        }
+
+        // Update the post
+        $post->update([
+            'title' => $dto->title,
+            'description' => $dto->description,
+            'slug' => $slug,
+            'image_path' => $imagePath,
+            'allow_comments' => $dto->allow_comments ?? $post->allow_comments,
+        ]);
+
+        // Sync hashtags if provided
+        if ($dto->hashtags) {
+            $post->syncHashtags($dto->hashtags);
+        }
+
+        return $post->fresh();
     }
 }

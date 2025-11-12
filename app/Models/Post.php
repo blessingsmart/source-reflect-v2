@@ -50,6 +50,12 @@ class Post extends Model
   {
     return $this->hasMany(PostReport::class);
   }
+
+  public function shouldBeSearchable()
+    {
+        return true;
+    }
+
   public function toSearchableArray()
   {
     return [

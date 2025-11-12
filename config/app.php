@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Facade;
+
 return [
 
     /*
@@ -123,8 +125,7 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-
-     /*
+    /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
@@ -178,6 +179,11 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\PermissionServiceProvider::class,
 
+        /*
+         * External Packages
+         */
+        //  Intervention\Image\Laravel\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -192,8 +198,7 @@ return [
     */
 
     // 'aliases' => Facade::defaultAliases()->merge([
-    //     // 'ExampleClass' => App\Example\ExampleClass::class,
+    // 'Image' => Intervention\Image\Laravel\Facades\Image::class,
     // ])->toArray(),
-
 
 ];

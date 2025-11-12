@@ -19,6 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
       'name',
       'username',
+      'slug',
       'email',
       'password',
       'phone',
@@ -89,4 +90,49 @@ public function getCoverAttribute()
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Generate slug automatically when creating user
+        static::creating(function ($user) {
+            if (empty($user->slug)) {
+                $user->slug = $user->generateUniqueSlug();
+            }
+        });
+
+        // Update slug when username changes
+        static::updating(function ($user) {
+            if ($user->isDirty('username')) {
+                $user->slug = $user->generateUniqueSlug();
+            }
+        });
+    }
+
+    /**
+     * Generate a unique slug for the user
+     */
+    public function generateUniqueSlug()
+    {
+        $slug = Str::slug($this->username);
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Check if slug already exists
+        while (static::where('slug', $slug)->where('id', '!=', $this->id)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Get the route key for the model (for pretty URLs)
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
