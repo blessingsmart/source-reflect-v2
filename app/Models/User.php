@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use App\Traits\HasPermissionsTrait;
+use Illuminate\Support\Str;
+
 class User extends Authenticatable 
 {
     use HasApiTokens, HasFactory, Notifiable, HasPermissionsTrait;
