@@ -20,7 +20,8 @@ class Post extends Model
     'is_featured',
     'likes_count',
     'views',
-    'allow_comments'
+    'allow_comments',
+    'status'
   ];
 
   public function newEloquentBuilder($query): PostBuilder
