@@ -230,5 +230,41 @@
       }
     });
   </script>
+  <script>
+    const imageSelected = document.getElementById('imageSelected');
+    const imagePreview = document.getElementById('imagePreview');
+    const imageContainer = document.getElementById('imageContainer');
+    const cancelPreview = document.getElementById('cancelPreview');
+    const fileSize = document.getElementById('fileSize');
+  
+    imageSelected.addEventListener('change',event=>{
+        const file = event.target.files[0];
+        if(file){
+          const reader = new FileReader();
+  
+          reader.onload = eo =>{
+            imagePreview.src = eo.target.result;
+            imagePreview.classList.remove('hidden');
+            cancelPreview.classList.remove('hidden');
+            imageContainer.classList.remove('hidden');
+            fileSize.classList.remove('hidden');
+            fileSize.textContent = `${(file.size / (1024 * 1024)).toFixed(2)} MB / 5MB`; 
+          }
+          reader.readAsDataURL(file);
+        }else{
+          imagePreview.src = '#';
+          imagePreview.classList.add('hidden');
+        }
+  
+    })
+    cancelPreview.addEventListener('click', function () {
+      imageSelected.value = ''; 
+      imagePreview.src = '#';
+      cancelPreview.classList.add('hidden');
+      fileSize.classList.add('hidden');
+      imageContainer.classList.add('hidden');
+    });
+	</script>
+  
 </body>
 </html>

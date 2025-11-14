@@ -61,13 +61,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+    <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<script> window.initialTags = @json($initialTags ?? []); </script>    
     @vite(['resources/css/app.css', 'resources/js/app.tsx'])
     @stack('styles')
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
@@ -165,4 +166,5 @@
             color: #059669;
             border: 1px solid #dcfce7;
         }
+
     </style>

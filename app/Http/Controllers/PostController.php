@@ -112,8 +112,10 @@ class PostController extends Controller
     {
         $allhashtags = Hashtag::pluck('name');
 
+        $initialTags = old('hashtag') ? explode(',', old('hashtag')) : [];
         return view('create', [
-            'allhashtags' => $allhashtags
+            'allhashtags' => $allhashtags,
+            'initialTags' => $initialTags,
         ]);
     }
 
