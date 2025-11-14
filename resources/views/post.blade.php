@@ -9,7 +9,7 @@
 
   {{-- Hero Image --}}
   <div class="relative mx-auto w-full mt-2 h-[300px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg">
-      <img class="absolute top-0 left-0 w-full h-full object-cover" src="/storage/uploads/{{$post->image_path}}"  alt="{{$post->title}}">
+      <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ asset('storage/uploads/' . $post->image_path) }}"  alt="{{$post->title}}">
       {{-- Gradient Overlay --}}
       <div class="absolute inset-0 bg-gradient-to-t from-green-900/50 to-transparent"></div>
       
