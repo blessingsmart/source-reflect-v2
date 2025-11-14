@@ -17,8 +17,6 @@ COPY . .
 # Fix permissions for SQLite database
 RUN chmod -R 775 database && chown -R www-data:www-data database
 
-# Create storage symlink
-RUN php artisan storage:link
 
 # Set Apache to use public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
@@ -32,9 +30,8 @@ RUN composer install --optimize-autoloader --no-dev
 # Frontend deps
 RUN npm install && npm run build
 
-# Fix permissions for storage
+# Fix permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 80
 
