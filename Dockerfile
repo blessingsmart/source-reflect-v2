@@ -1,6 +1,6 @@
 FROM php:8.3-apache
 
-# Install PHP extensions
+# Install PHP extensions and dependencies
 RUN apt-get update && apt-get install -y \
     git curl unzip zip libpng-dev libonig-dev libxml2-dev libzip-dev npm \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath zip gd
@@ -11,12 +11,11 @@ RUN a2enmod rewrite
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy all files (including database.sqlite)
+# Copy all files
 COPY . .
 
 # Fix permissions for SQLite database
 RUN chmod -R 775 database && chown -R www-data:www-data database
-
 
 # Set Apache to use public folder
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
@@ -30,8 +29,12 @@ RUN composer install --optimize-autoloader --no-dev
 # Frontend deps
 RUN npm install && npm run build
 
-# Fix permissions
-RUN chown -R www-data:www-data storage bootstrap/cache
+# Create storage symlink (CRITICAL STEP)
+RUN php artisan storage:link
+
+# Fix permissions for storage and bootstrap
+RUN chown -R www-data:www-data storage bootstrap/cache public/storage
+RUN chmod -R 775 storage bootstrap/cache public/storage
 
 EXPOSE 80
 
