@@ -9,7 +9,29 @@
 
   {{-- Hero Image --}}
   <div class="relative mx-auto w-full mt-2 h-[300px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg">
-      <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ asset('storage/uploads/' . $post->image_path) }}"  alt="{{$post->title}}">
+      @php
+    $imageUrl = null;
+    
+    $possiblePaths = [
+        '/var/www/html/storage/uploads/' . $post->image_path,
+        public_path('storage/uploads/' . $post->image_path)
+    ];
+    
+    foreach ($possiblePaths as $path) {
+        if (file_exists($path)) {
+            $imageUrl = asset('storage/uploads/' . $post->image_path);
+            break;
+        }
+    }
+    @endphp
+
+    @if($imageUrl)
+        <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ $imageUrl }}" alt="{{ $post->title }}">
+    @else
+        <div class="absolute top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-500">Image not found</span>
+        </div>
+    @endif
       {{-- Gradient Overlay --}}
       <div class="absolute inset-0 bg-gradient-to-t from-green-900/50 to-transparent"></div>
       

@@ -102,7 +102,25 @@
                         <!-- Post Image -->
                         <div class="h-48 bg-gradient-to-r from-green-400 to-emerald-500 relative overflow-hidden">
                             @if($post->image_path)
-                                <img src="/storage/uploads/{{$post->image_path}}" 
+                                    @php
+                                        $imageUrl = null;
+                                        
+                                        $possiblePaths = [
+                                            '/var/www/html/storage/uploads/' . $post->image_path,
+                                            public_path('storage/uploads/' . $post->image_path)
+                                        ];
+                                        
+                                        foreach ($possiblePaths as $path) {
+                                            if (file_exists($path)) {
+                                                $imageUrl = asset('storage/uploads/' . $post->image_path);
+                                                break;
+                                            }
+                                        }
+                                    @endphp
+
+                                    @if($imageUrl)
+                                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ $imageUrl }}" alt="{{ $post->title }}">
+                                    @endif                                    
                                      alt="{{ $post->title }}" 
                                      class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                             @else
