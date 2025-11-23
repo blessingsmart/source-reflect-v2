@@ -101,33 +101,32 @@
                     <div class="bg-white rounded-2xl shadow-sm border border-green-100 overflow-hidden card-hover fade-in">
                         <!-- Post Image -->
                         <div class="h-48 bg-gradient-to-r from-green-400 to-emerald-500 relative overflow-hidden">
-                            @if($post->image_path)
-                                    @php
-                                        $imageUrl = null;
-                                        
-                                        $possiblePaths = [
-                                            '/var/www/html/storage/uploads/' . $post->image_path,
-                                            public_path('storage/uploads/' . $post->image_path)
-                                        ];
-                                        
-                                        foreach ($possiblePaths as $path) {
-                                            if (file_exists($path)) {
-                                                $imageUrl = asset('storage/uploads/' . $post->image_path);
-                                                break;
-                                            }
-                                        }
-                                    @endphp
+                           @php
+    $imageUrl = null;
+    if ($post->image_path) {
+        $possiblePaths = [
+            '/var/www/html/storage/uploads/' . $post->image_path,
+            public_path('storage/uploads/' . $post->image_path)
+        ];
+        
+        foreach ($possiblePaths as $path) {
+            if (file_exists($path)) {
+                $imageUrl = asset('storage/uploads/' . $post->image_path);
+                break;
+            }
+        }
+    }
+@endphp
 
-                                    @if($imageUrl)
-                                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ $imageUrl }}" alt="{{ $post->title }}">
-                                    @endif                                    
-                                     alt="{{ $post->title }}" 
-                                     class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                            @else
-                                <div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600">
-                                    <i class="fas fa-newspaper text-white text-4xl opacity-80"></i>
-                                </div>
-                            @endif
+@if($imageUrl)
+    <img class="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105" 
+         src="{{ $imageUrl }}" 
+         alt="{{ $post->title }}">
+@else
+    <div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-green-500 to-emerald-600">
+        <i class="fas fa-newspaper text-white text-4xl opacity-80"></i>
+    </div>
+@endif
                             <!-- Hashtags -->
                             @if($post->hashtags->count() > 0)
                                 <span class="absolute top-4 left-4 bg-green-600 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">

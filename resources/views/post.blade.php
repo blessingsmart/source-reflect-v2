@@ -3,55 +3,19 @@
 
   <div class="relative w-full mx-auto mt-2">
       {{-- delete|edit model  --}}
-    @can('view',$post)
-      @include('partials.delete-edit-post-model')
+    @auth
+      @can('view',$post)
+        @include('partials.delete-edit-post-model')
       @endcan
+    @endauth
 
-  {{-- Hero Image --}}
-  <div class="relative mx-auto w-full mt-2 h-[300px] md:h-[450px] rounded-2xl overflow-hidden shadow-lg">
-      @php
-    $imageUrl = null;
-    
-    $possiblePaths = [
-        '/var/www/html/storage/uploads/' . $post->image_path,
-        public_path('storage/uploads/' . $post->image_path)
-    ];
-    
-    foreach ($possiblePaths as $path) {
-        if (file_exists($path)) {
-            $imageUrl = asset('storage/uploads/' . $post->image_path);
-            break;
-        }
-    }
-    @endphp
+  {{-- Post Title & user information --}}
+  <div class="flex flex-col items-center justify-center container mx-auto pb-6 mt-8">
+    <h1 class="block w-full font-bold md:text-5xl text-3xl text-center text-gray-900 leading-tight bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+      {{$post->title}}
+    </h1>
 
-    @if($imageUrl)
-        <img class="absolute top-0 left-0 w-full h-full object-cover" src="{{ $imageUrl }}" alt="{{ $post->title }}">
-    @else
-        <div class="absolute top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center">
-            <span class="text-gray-500">Image not found</span>
-        </div>
-    @endif
-      {{-- Gradient Overlay --}}
-      <div class="absolute inset-0 bg-gradient-to-t from-green-900/50 to-transparent"></div>
-      
-      {{-- hashtags on post --}}
-      <div class="absolute z-10 bottom-4 left-6 flex flex-wrap gap-2">
-        @foreach($post->hashtags->pluck('name') as $tag)
-          <span class="px-3 py-1.5 text-white text-sm rounded-full bg-green-600/90 backdrop-blur-sm font-semibold hover:bg-green-700 transition-all duration-300 hover:scale-105">
-            <a href="{{route('viewhashtag',$tag)}}">#{{ $tag }}</a>
-          </span>
-        @endforeach
-      </div>
-  </div>
-
-{{-- Post Title & user information --}}
-<div class="flex flex-col items-center justify-center container mx-auto pb-6 mt-8">
-  <h1 class="block w-full font-bold md:text-5xl text-3xl text-center text-gray-900 leading-tight bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-    {{$post->title}}
-  </h1>
-
-   
+     
     <div class="mt-6 flex flex-col sm:flex-row justify-center items-center gap-4 text-gray-600">
       <div class="flex items-center gap-3">
         {{-- <a href='{{route('profile',$post->user)}}' class="flex items-center gap-3 group">
@@ -80,12 +44,21 @@
         </span> --}}
       </div>
     </div>
-</div>
+  </div>
 
-{{-- Content --}}
-<div class="published-content w-full py-8 px-4 bg-white rounded-2xl shadow-sm border border-green-100">
-  {!! $post->description !!}
-</div>
+  {{-- hashtags on post --}}
+  <div class="flex justify-center gap-2 mb-6">
+    @foreach($post->hashtags->pluck('name') as $tag)
+      <span class="px-3 py-1.5 text-white text-sm rounded-full bg-green-600/90 backdrop-blur-sm font-semibold hover:bg-green-700 transition-all duration-300 hover:scale-105">
+        <a href="{{route('viewhashtag',$tag)}}">#{{ $tag }}</a>
+      </span>
+    @endforeach
+  </div>
+
+  {{-- Content --}}
+  <div class="published-content w-full py-8 px-4 bg-white rounded-2xl shadow-sm border border-green-100">
+    {!! $post->description !!}
+  </div>
 </div>
 
 {{-- Floating Action Bar --}}
@@ -115,17 +88,19 @@
   </div>
   @endif
 
-  @if(auth()->user()->is($post->user))
-  <div class="h-6 w-px bg-green-200"></div>
-  
-  {{-- Views --}}
-  <span id="openviewsmodel" class="cursor-pointer flex items-center group">
-    <span class="w-10 h-10 rounded-full flex justify-center items-center hover:bg-green-50 transition-all duration-200 group-hover:scale-110">
-      <i class="far fa-eye text-gray-600 group-hover:text-blue-500"></i>
+  @auth
+    @if(auth()->user()->is($post->user))
+    <div class="h-6 w-px bg-green-200"></div>
+    
+    {{-- Views --}}
+    <span id="openviewsmodel" class="cursor-pointer flex items-center group">
+      <span class="w-10 h-10 rounded-full flex justify-center items-center hover:bg-green-50 transition-all duration-200 group-hover:scale-110">
+        <i class="far fa-eye text-gray-600 group-hover:text-blue-500"></i>
+      </span>
+      <span class="text-sm font-semibold text-gray-700 ml-2">{{$post->views}}</span>
     </span>
-    <span class="text-sm font-semibold text-gray-700 ml-2">{{$post->views}}</span>
-  </span>
-  @endif
+    @endif
+  @endauth
 
   <div id="divider" class="h-6 w-px bg-green-200 hidden"></div>
   
@@ -149,17 +124,19 @@
   </span>
 
   {{-- More Options --}}
-  <div @class([
-    'relative flex items-center',
-    'hidden' => auth()->user()->cannot('report', $post) && auth()->user()->is($post->user)
-  ])>
-    <div class="h-6 w-px bg-green-200"></div>
-    <span id="openmoremodel" title="more options" class="cursor-pointer flex justify-center items-center w-10 h-10 rounded-full hover:bg-green-50 transition-all duration-200 group-hover:scale-110 group">
-      <i class="fas fa-ellipsis-v text-gray-600 group-hover:text-gray-700"></i>
-    </span>
-    {{-- more menu --}}
-    @include('partials.more-menu')
-  </div>
+  @auth
+    <div @class([
+      'relative flex items-center',
+      'hidden' => auth()->user()->cannot('report', $post) && auth()->user()->is($post->user)
+    ])>
+      <div class="h-6 w-px bg-green-200"></div>
+      <span id="openmoremodel" title="more options" class="cursor-pointer flex justify-center items-center w-10 h-10 rounded-full hover:bg-green-50 transition-all duration-200 group-hover:scale-110 group">
+        <i class="fas fa-ellipsis-v text-gray-600 group-hover:text-gray-700"></i>
+      </span>
+      {{-- more menu --}}
+      @include('partials.more-menu')
+    </div>
+  @endauth
 </div>
 
 {{-- Bottom Hashtags --}}
@@ -319,15 +296,17 @@
 {{-- All scripts ---}}
 @push('scripts')
 {{-- Post menu edit and delete option --}}
-@can('view',$post)
-<script>
-  const OpenModel = document.getElementById('openmodel');
-  const Model = document.getElementById('model');
-  OpenModel.addEventListener('click',()=>{
-    Model.classList.toggle('hidden');
-  })
-</script>
-@endcan
+@auth
+  @can('view',$post)
+  <script>
+    const OpenModel = document.getElementById('openmodel');
+    const Model = document.getElementById('model');
+    OpenModel.addEventListener('click',()=>{
+      Model.classList.toggle('hidden');
+    })
+  </script>
+  @endcan
+@endauth
 
 {{-- Observer for floating action bar --}}
 <script>
