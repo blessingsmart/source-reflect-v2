@@ -23,7 +23,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
 
-        'title' => 'required|string|regex:/^[A-Za-z0-9\s]+$/|max:50|min:6',
+        'title' => 'required|string|regex:/^[A-Za-z0-9\s]+$/|max:150|min:6',
         'description' => 'required|string',
         'hashtag' => ['nullable', 'string', function ($attribute, $value, $fail) {
           
