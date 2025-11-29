@@ -23,10 +23,11 @@ class SendPostReportNotification
      */
     public function handle(PostReportEvent $event): void
     {
-        $post = $event->post;
-        $reporter = $event->user;
-         User::where('is_admin', true)->get()->each(function ($admin) use ( $post,$reporter) {
-      $admin->notify(new PostReportNotification(  $post,$reporter));
-       });
+        // Temporarily disabled - will implement later
+        // $post = $event->post;
+        // $reporter = $event->user;
+        // User::where('is_admin', true)->get()->each(function ($admin) use ( $post,$reporter) {
+        //   $admin->notify(new PostReportNotification(  $post,$reporter));
+        // });
     }
 }

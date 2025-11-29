@@ -10,7 +10,8 @@ class PostViewsService
     public function getViews(Post $post,){
       $viewer = auth()->user();
       $poster = $post->user_id;
-      if($viewer->id === $poster || $viewer->is_admin) return;
+      // if($viewer->id === $poster || $viewer->is_admin) 
+        return;
 
       $createview = PostView::firstOrCreate([
           'post_id' => $post->id,

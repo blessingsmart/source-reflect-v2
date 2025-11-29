@@ -68,8 +68,12 @@ class Post extends Model
   }
 
   public function is_liked(){
-    return $this->likes()->where('user_id',auth()->user()->id)->exists();
-  }
+    // Check if user is authenticated before checking likes
+    if (auth()->check()) {
+        return $this->likes()->where('user_id', auth()->user()->id)->exists();
+    }
+    return false;
+}
 
   public function scopeFeatured($query)
   {

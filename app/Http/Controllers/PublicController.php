@@ -20,7 +20,7 @@ class PublicController extends Controller
     protected ViewPostService $singlepost,
     protected PostViewsService $views)
   {
-    $this->middleware(['auth','verified',CheckIfBlocked::class]);
+    // $this->middleware(['auth','verified',CheckIfBlocked::class]);
   }
 
 
