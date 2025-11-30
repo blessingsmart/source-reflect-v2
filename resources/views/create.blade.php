@@ -36,7 +36,7 @@
         </div>
 
         <!-- Featured Image -->
-        <div class="mb-6">
+        {{-- <div class="mb-6">
           <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Featured Image:</label>
           <input type="file" id="imageSelected" name="image" 
                  class="w-full p-3 border-2 border-gray-300 rounded-lg @error('image') border-red-500 @enderror"
@@ -59,7 +59,7 @@
               {{ $message }}
           </p>
           @enderror
-        </div>
+        </div> --}}
 
         <!-- Hashtags Section -->
         <div class="mb-6">

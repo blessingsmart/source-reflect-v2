@@ -33,7 +33,7 @@ const Nav = () => {
         { id: 1, href: '/', title: 'Home' },
         { id: 2, href: '/about', title: 'About Us' },
         { id: 4, href: '/services', title: 'Services' },
-        { id: 5, href: '/blog', title: 'Blog' },
+        { id: 5, href: '/blog', title: 'Blog', external: true }, // Added external: true for blog
         { id: 6, href: '/contact', title: 'Contact' },
     ];
 
@@ -67,7 +67,7 @@ const Nav = () => {
 
                 {/* Desktop Menu */}
                 <ul className="hidden items-center space-x-1 md:flex">
-                    {links.map(({ id, href, title, to }) => (
+                    {links.map(({ id, href, title, to, external }) => (
                         <li key={id} className="relative">
                             {to ? (
                                 <ScrollLink
@@ -79,7 +79,17 @@ const Nav = () => {
                                     {title}
                                     <span className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-800 transition-all duration-300 group-hover:left-1/10 group-hover:w-4/5"></span>
                                 </ScrollLink>
+                            ) : external ? (
+                                // External links (like blog) use regular anchor tag
+                                <a
+                                    href={href}
+                                    className="group relative cursor-pointer px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:text-blue-800"
+                                >
+                                    {title}
+                                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-800 transition-all duration-300 group-hover:left-1/10 group-hover:w-4/5"></span>
+                                </a>
                             ) : (
+                                // Internal links use Inertia Link
                                 <Link
                                     href={href}
                                     className="group relative cursor-pointer px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:text-blue-800"
@@ -137,7 +147,7 @@ const Nav = () => {
                         {/* Menu items */}
                         <nav className="flex-1 overflow-y-auto p-6">
                             <ul className="space-y-4">
-                                {links.map(({ id, href, title, to }) => (
+                                {links.map(({ id, href, title, to, external }) => (
                                     <li key={id}>
                                         {to ? (
                                             <ScrollLink
@@ -149,7 +159,17 @@ const Nav = () => {
                                             >
                                                 {title}
                                             </ScrollLink>
+                                        ) : external ? (
+                                            // External links (like blog) use regular anchor tag
+                                            <a
+                                                href={href}
+                                                className="block rounded-md px-4 py-3 text-lg font-medium text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-800"
+                                                onClick={() => setNav(false)}
+                                            >
+                                                {title}
+                                            </a>
                                         ) : (
+                                            // Internal links use Inertia Link
                                             <Link
                                                 href={href}
                                                 className="block rounded-md px-4 py-3 text-lg font-medium text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-800"
