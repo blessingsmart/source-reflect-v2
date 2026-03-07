@@ -10,7 +10,6 @@ class CreatePostDTO
     public function __construct(
        public readonly string $title,
        public readonly string $description,
-       public readonly UploadedFile $image,
        public readonly ?bool $allowComments,
        public readonly int $userId,
        public readonly ?string $hashtags, 
@@ -26,7 +25,6 @@ class CreatePostDTO
         return new self(
            title: $title,
            description: $request->validated('description'),
-           image: $request->file('image'),
            allowComments: $allowComments,
            userId: auth()->id(),
            hashtags: $request->filled('hashtag') ? $request->validated('hashtag') : null,

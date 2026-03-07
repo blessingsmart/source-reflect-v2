@@ -7,6 +7,17 @@
       <form action="{{route('create')}}" method="POST" enctype="multipart/form-data" class="p-6 w-full max-w-4xl bg-white rounded-lg shadow-lg">
         @csrf
         @method('POST')
+
+
+        <div class="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <p class="text-blue-800 font-medium">Debug Information:</p>
+        <ul class="text-sm text-blue-600 mt-1">
+            <li>Route Name: {{ Route::currentRouteName() }}</li>
+            <li>Form Action: {{ route('create') }}</li>
+            <li>Old Input: {{ old('title') ? 'Yes' : 'No' }}</li>
+            <li>Session Errors: {{ session('errors') ? 'Yes' : 'No' }}</li>
+        </ul>
+    </div>
       
         <!-- Title Field -->
         <div class="mb-6">
@@ -35,31 +46,6 @@
           @enderror
         </div>
 
-        <!-- Featured Image -->
-        {{-- <div class="mb-6">
-          <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Featured Image:</label>
-          <input type="file" id="imageSelected" name="image" 
-                 class="w-full p-3 border-2 border-gray-300 rounded-lg @error('image') border-red-500 @enderror"
-                 accept="image/*">
-          
-          <!-- Image Preview -->
-          <div class="mt-4 relative" id="imageContainer">
-            <img id="imagePreview" src="#" alt="Image Preview" 
-                 class="hidden max-w-full md:max-w-md rounded-lg shadow-lg border-4 border-blue-200">
-            <div id="imageInfo" class="hidden mt-2 p-3 bg-gray-100 rounded-lg">
-              <span id="cancelPreview" class="inline-flex items-center px-3 py-1 bg-red-500 text-white rounded-full text-sm font-bold hover:bg-red-600 cursor-pointer mr-2">
-                <i class="fas fa-times mr-1"></i> Remove
-              </span>
-              <span id="fileSize" class="text-gray-600 text-sm"></span>
-            </div>
-          </div>
-          
-          @error('image')
-          <p class="text-red-500 text-xs italic mt-2">
-              {{ $message }}
-          </p>
-          @enderror
-        </div> --}}
 
         <!-- Hashtags Section -->
         <div class="mb-6">
@@ -91,6 +77,11 @@
               {{ $message }}
           </p>
           @enderror
+
+          
+@php
+  $initialTags = old('hashtag') ? explode(',', old('hashtag')) : [];
+@endphp
           
           <!-- Existing Hashtags Selection -->
           @if($allhashtags->isNotEmpty())
@@ -143,9 +134,6 @@
     </div>
   </div>
 
-@php
-  $initialTags = old('hashtag') ? explode(',', old('hashtag')) : [];
-@endphp
 
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -195,7 +183,7 @@
 
 @push('scripts')
 <!-- Load CKEditor 4 from CDN -->
-<script src="https://cdn.ckeditor.com/4.23.0-lts/standard/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
 
 <script>
   // Initialize CKEditor 4 with enhanced configuration
@@ -316,60 +304,6 @@
       submitBtn.innerHTML = originalText;
       submitBtn.disabled = false;
     }, 5000);
-  });
-
-  // Enhanced image preview functionality
-  document.getElementById('imageSelected').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('imagePreview');
-    const imageInfo = document.getElementById('imageInfo');
-    const fileSize = document.getElementById('fileSize');
-    
-    if (file) {
-      // Validate file type
-      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-      if (!validTypes.includes(file.type)) {
-        alert('Please select a valid image file (JPEG, PNG, GIF, or WebP).');
-        this.value = '';
-        return;
-      }
-      
-      // Validate file size (5MB max)
-      const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-      if (file.size > maxSize) {
-        alert('Image size should be less than 5MB.');
-        this.value = '';
-        return;
-      }
-      
-      const reader = new FileReader();
-      
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
-        imageInfo.classList.remove('hidden');
-        
-        // Display file info
-        const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-        const dimensions = `${file.type.split('/')[1].toUpperCase()} • ${sizeInMB} MB`;
-        fileSize.textContent = dimensions;
-      }
-      
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // Cancel image preview
-  document.addEventListener('click', function(e) {
-    if (e.target.id === 'cancelPreview' || e.target.closest('#cancelPreview')) {
-      const preview = document.getElementById('imagePreview');
-      const imageInfo = document.getElementById('imageInfo');
-      const fileInput = document.getElementById('imageSelected');
-      
-      preview.classList.add('hidden');
-      imageInfo.classList.add('hidden');
-      fileInput.value = '';
-    }
   });
 
   // Enhanced hashtag functionality
