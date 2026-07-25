@@ -3,28 +3,28 @@ import { motion } from 'framer-motion';
 export default function WhoWeHelp() {
     const audienceTypes = [
         {
-            title: 'Diaspora Returnees',
-            description: 'You were raised abroad. Nigeria looks familiar but feels foreign.',
+            title: 'Individuals & Professionals',
+            description: 'Moving abroad, coming home, or relocating within Nigeria? We support your personal journey.',
             icon: '🌍',
-            features: ['Cultural reintegration', 'Family settlement', 'Business setup guidance'],
+            features: ['Personalised move plans', 'Housing search', 'Local support services'],
         },
         {
-            title: 'Expats',
-            description: 'First time in West Africa? We help you thrive, not just survive.',
-            icon: '👨‍💼',
-            features: ['Complete orientation', 'Safety protocols', 'Social integration'],
+            title: 'Families',
+            description: 'Relocation support for parents, children and partners who need structure and peace of mind.',
+            icon: '👨‍👩‍👧‍👦',
+            features: ['School search', 'Family-friendly neighbourhoods', 'Household setup'],
         },
         {
-            title: 'HR Teams',
-            description: 'Managing employee relocation? We remove the friction.',
+            title: 'HR & Mobility Teams',
+            description: 'Corporate moves made easier for domestic transfers, inbound arrivals and outbound assignments.',
             icon: '🏢',
-            features: ['Bulk relocation', 'Corporate housing', 'Employee support'],
+            features: ['Domestic moves', 'Inbound employee support', 'Outbound relocation strategy'],
         },
         {
-            title: 'NGO/Missionary Staff',
-            description: 'Budget-friendly solutions. Total safety. Real support.',
-            icon: '✝️',
-            features: ['Security briefing', 'Community integration', 'Logistical support'],
+            title: 'Returnees & Expats',
+            description: 'Experienced support for people arriving from abroad or returning to Nigeria after time away.',
+            icon: '✈️',
+            features: ['Cultural reintegration', 'Safety orientation', 'Community introductions'],
         },
     ];
 
@@ -37,7 +37,7 @@ export default function WhoWeHelp() {
                     viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Not Everyone Needs Help. But If You're New, You Do.</h2>
+                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Trusted by people and teams for every relocation direction.</h2>
                 </motion.div>
 
                 <div className="mb-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">

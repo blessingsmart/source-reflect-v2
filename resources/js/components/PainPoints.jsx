@@ -12,7 +12,7 @@ export default function PainPoints() {
                     transition={{ duration: 0.8 }}
                     className="mb-20 text-center"
                 >
-                    <h2 className="mb-8 text-5xl leading-tight font-bold text-gray-900">Moving to Nigeria is overwhelming.</h2>
+                    <h2 className="mb-8 text-5xl leading-tight font-bold text-gray-900">Moving anywhere can feel overwhelming.</h2>
 
                     {/* Pain Points Grid */}
                     <div className="mx-auto grid max-w-6xl gap-8 text-left md:grid-cols-3">
@@ -28,7 +28,7 @@ export default function PainPoints() {
                                 </div>
                                 <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know where to live.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Safe neighborhoods, commute times, family-friendly areas...
+                                    Safe neighbourhoods, commute times, schools and local services for your next step.
                                 </p>
                             </div>
                         </motion.div>
@@ -45,7 +45,7 @@ export default function PainPoints() {
                                 </div>
                                 <h3 className="mb-4 text-2xl leading-relaxed font-bold text-blue-900">You don't know who to trust.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Real estate agents, service providers, local contacts...
+                                    Trusted vendors, local advisors and compliance-ready partners for every move.
                                 </p>
                             </div>
                         </motion.div>
@@ -62,7 +62,7 @@ export default function PainPoints() {
                                 </div>
                                 <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know what you don't know.</h3>
                                 <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Cultural norms, safety tips, local customs, hidden costs...
+                                    Cultural expectations, safety protocols, hidden costs and local process.
                                 </p>
                             </div>
                         </motion.div>
@@ -84,7 +84,7 @@ export default function PainPoints() {
                             transition={{ type: 'spring', stiffness: 200 }}
                             className="mb-6 text-6xl leading-tight font-bold text-green-600"
                         >
-                            Setu Down does.
+                            Helping people move with confidence.
                         </motion.h3>
                         <motion.p
                             initial={{ opacity: 0 }}
@@ -92,7 +92,7 @@ export default function PainPoints() {
                             transition={{ delay: 0.3 }}
                             className="mx-auto max-w-4xl text-2xl leading-relaxed text-gray-700"
                         >
-                            We've helped families, professionals, and returnees transition smoothly—without drama, without scams, without regret.
+                            We help individuals, families and organisations relocate with confidence—across borders, back home, and between cities.
                         </motion.p>
                     </div>
 
@@ -104,9 +104,9 @@ export default function PainPoints() {
                         className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3"
                     >
                         {[
-                            { icon: '✅', title: 'Verified vendors', desc: 'Pre-screened and trusted partners' },
-                            { icon: '🕒', title: '24/7 relocation support', desc: 'Always available when you need us' },
-                            { icon: '🎯', title: 'Personalized plans', desc: 'Tailored to your budget and needs' },
+                            { icon: '👤', title: 'Personal Relocation', desc: 'Individual support for every move.' },
+                            { icon: '👨‍👩‍👧‍👦', title: 'Family Relocation', desc: 'Planning and settling support for every household.' },
+                            { icon: '🏢', title: 'Corporate Relocation', desc: 'Employee moves that keep teams productive.' },
                         ].map((item, index) => (
                             <motion.div
                                 key={index}
@@ -119,6 +119,27 @@ export default function PainPoints() {
                                 <div className="mt-4 h-1 w-0 bg-gradient-to-r from-green-400 to-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                             </motion.div>
                         ))}
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.55 }}
+                        className="mx-auto mt-12 max-w-4xl rounded-3xl border border-green-100 bg-white p-8 shadow-xl"
+                    >
+                        <p className="text-lg font-semibold text-gray-900">
+                            Helping individuals, families and organisations relocate with confidence.
+                        </p>
+                        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                            {['Personal Relocation', 'Family Relocation', 'Corporate Relocation', 'Settlement Services', 'Destination Support'].map(
+                                (item) => (
+                                    <div key={item} className="flex items-center gap-3 rounded-2xl bg-green-50 px-4 py-3">
+                                        <span className="text-green-600">✔</span>
+                                        <span className="text-gray-700">{item}</span>
+                                    </div>
+                                ),
+                            )}
+                        </div>
                     </motion.div>
 
                     {/* CTA Button */}

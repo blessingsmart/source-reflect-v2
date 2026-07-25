@@ -6,22 +6,22 @@ export default function HowItWorks() {
         {
             number: '01',
             title: 'Tell us about your move',
-            description: "Fill our short intake form. Are you moving alone? With kids? What's your timeline?",
+            description: "Fill our short intake form. Are you moving abroad, to Nigeria, or within the country? What's your timeline?",
         },
         {
             number: '02',
             title: 'Choose your plan',
-            description: "We'll recommend a package—or build one from scratch.",
+            description: "We'll recommend a package—or build one from scratch to match your relocation direction.",
         },
         {
             number: '03',
             title: 'We handle everything',
-            description: 'From airport pickup to property keys to getting Wi-Fi and groceries in your kitchen.',
+            description: 'From airport pickup to utility setup and transport coordination, we make your first weeks easier.',
         },
         {
             number: '04',
-            title: 'You Settle Down',
-            description: 'Live, work, thrive in Nigeria. Without chaos.',
+            title: 'You settle in',
+            description: 'Move with clarity and confidence—whether abroad, back home, or to a new city.',
         },
     ];
 
@@ -34,7 +34,7 @@ export default function HowItWorks() {
                     viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Here's How We Get You Settled.</h2>
+                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Here’s how we make every move feel planned.</h2>
                 </motion.div>
 
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">

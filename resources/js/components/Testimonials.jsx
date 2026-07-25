@@ -34,7 +34,10 @@ export default function Testimonials() {
                     viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">They Landed with Luggage. We Handled the Rest.</h2>
+                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Real relocation stories from abroad, return and local moves.</h2>
+                    <p className="mx-auto max-w-3xl text-lg leading-relaxed text-gray-600">
+                        Read how people and teams settled with more confidence and less hassle.
+                    </p>
                 </motion.div>
 
                 <div className="mb-12 grid gap-8 md:grid-cols-3">

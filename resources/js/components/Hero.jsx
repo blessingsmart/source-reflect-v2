@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 
 const Hero = () => {
     return (
-        <section className="relative flex h-screen items-center justify-center overflow-hidden">
+        <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden">
             {/* Background Image with Overlay */}
             <div
                 className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
@@ -24,7 +24,7 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                     className="mb-6 text-4xl font-bold md:text-5xl lg:text-6xl"
                 >
-                    Relocating to Nigeria? Settle Down Without the Stress.
+                    Wherever you're moving, we'll help you settle down.
                 </motion.h1>
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -32,7 +32,7 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.2 }}
                     className="mx-auto mb-10 max-w-3xl text-xl md:text-2xl"
                 >
-                    From housing and schools to security and culture, we handle everything so you don't have to.
+                    Relocation and settlement support for individuals, families and organisations moving abroad, moving to Nigeria, or relocating within Nigeria.
                 </motion.p>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -40,27 +40,28 @@ const Hero = () => {
                     transition={{ duration: 0.8, delay: 0.4 }}
                     className="flex flex-col justify-center gap-4 sm:flex-row"
                 >
-                    <motion.a
-                        href="http://wa.me/2348165608778"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="group flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-white transition-all duration-300 hover:bg-green-700"
-                    >
-                        Get Started
-                    </motion.a>
+                    <Link href="/contact">
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="group flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-white transition-all duration-300 hover:bg-green-700"
+                        >
+                            Start Your Relocation
+                        </motion.button>
+                    </Link>
                     <Link href="#packages">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="group flex items-center justify-center gap-2 rounded-lg border-2 border-white px-6 py-3 text-white transition-all duration-300 hover:bg-white hover:text-green-900"
                         >
-                            See Our Packages
+                            Explore Services
                         </motion.button>
                     </Link>
                 </motion.div>
             </div>
+
+
         </section>
     );
 };

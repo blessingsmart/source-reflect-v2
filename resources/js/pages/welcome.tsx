@@ -1,7 +1,9 @@
 // resources/js/pages/Home.jsx
 import ContactForm from '@/components/ContactForm';
 import CulturalOrientation from '@/components/CulturalOrientation';
+import DirectionSelector from '@/components/DirectionSelector';
 import FAQ from '@/components/FAQ';
+import BlogPreview from '@/components/BlogPreview';
 import Hero from '@/components/Hero';
 import HowItWorks from '@/components/HowItWorks';
 import Packages from '@/components/Packages';
@@ -17,14 +19,19 @@ export default function Home() {
 
     return (
         <GuestLayout>
-            <Head title={component} />
+            <Head>
+                <title>Setudown | Relocation & Settlement Services in Nigeria and Abroad</title>
+                <meta name="description" content="Professional relocation and settlement services for individuals, families and organisations moving abroad, moving to Nigeria or relocating within Nigeria." />
+            </Head>
             <Hero />
+            <DirectionSelector />
             <PainPoints />
             <HowItWorks />
             <Packages />
             <WhoWeHelp />
             <CulturalOrientation />
             <Testimonials />
+            <BlogPreview />
             <FAQ />
             <ContactForm />
             {/* <Partners /> */}
