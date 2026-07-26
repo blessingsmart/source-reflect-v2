@@ -1,210 +1,210 @@
+// resources/js/components/Nav.jsx
 import { Link } from '@inertiajs/react';
-import { Linkedin, Phone, Twitter } from 'lucide-react';
+import { Phone, Menu, X, Instagram, Twitter, Facebook, Linkedin, MessageCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
-import logo from '../assets/logo.png';
-import { Icon } from './icon';
 
 const Nav = () => {
-    const [nav, setNav] = useState(false);
+    const [navOpen, setNavOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
-            if (isScrolled !== scrolled) {
-                setScrolled(isScrolled);
-            }
+            setScrolled(window.scrollY > 20);
         };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
-        document.addEventListener('scroll', handleScroll);
-        return () => {
-            document.removeEventListener('scroll', handleScroll);
-        };
-    }, [scrolled]);
-
-    const scrollTo = (to) => {
-        setNav(false);
-        scroll.scrollTo(to);
-    };
-
-    const links = [
-        { id: 1, href: '/', title: 'Home' },
-        { id: 2, href: '/about', title: 'About Us' },
-        { id: 4, href: '/services', title: 'Services' },
-        { id: 5, href: '/blog', title: 'Blog', external: true }, // Added external: true for blog
-        { id: 6, href: '/contact', title: 'Contact' },
+    const navLinks = [
+        { label: 'Home', href: '/' },
+        { label: 'Moving Abroad', href: '/moving-abroad' },
+        { label: 'To Nigeria', href: '/moving-to-nigeria' },
+        { label: 'Within Nigeria', href: '/moving-within-nigeria' },
+        { label: 'Blog', href: '/blog' },
+        { label: 'Contact', href: '/contact' },
     ];
 
+    const closeMenu = () => setNavOpen(false);
+
     return (
-        <div className="top-0 right-0 left-0">
-            {/* Top info bar */}
-            <div className="flex h-10 items-center gap-3 bg-blue-950 px-4 text-gray-300 transition-all duration-300 sm:px-10">
-                <div className="flex items-center gap-4">
-                    <a href="https://x.com/setudown1?s=21" className="transition-colors duration-300 hover:text-white">
-                        <Icon iconNode={Twitter} className="size-4" />
+        <header className="sticky top-0 z-50">
+            {/* Announcement bar */}
+            <div className="hidden bg-brand-ink px-4 py-2 text-center text-xs text-white/80 sm:block">
+                <span>
+                    Now serving relocations in <strong className="text-brand-gold-bright">every direction</strong> — moving abroad, moving to Nigeria &amp; moving across it.{' '}
+                    <a
+                        href="https://wa.me/2348165608778"
+                        className="ml-2 inline-block rounded-full border border-white/20 px-3 py-0.5 text-[11px] font-medium text-brand-gold-bright transition hover:bg-white/10"
+                    >
+                        Chat on WhatsApp →
                     </a>
-                    {/* <a href="#" className="transition-colors duration-300 hover:text-white">
-                        <Icon iconNode={Linkedin} className="size-4" />
-                    </a> */}
-                </div>
-                <h2 className="ml-2 text-xs md:text-sm">Welcome to Setudown</h2>
+                </span>
             </div>
 
-            {/* Main navigation */}
-            <div
-                className={`flex h-20 w-full items-center justify-between bg-white px-4 transition-all duration-500 sm:px-10 ${scrolled ? 'py-2 shadow-md' : 'py-4 shadow-sm'}`}
+            {/* Main Nav */}
+            <nav
+                className={`transition-all duration-300 ${
+                    scrolled
+                        ? 'bg-white/90 shadow-lg backdrop-blur-md'
+                        : 'bg-white/80 backdrop-blur-sm'
+                } border-b border-white/20`}
             >
-                {/* Logo */}
-                <Link href="/" className="group flex items-center">
-                    <img
-                        src={logo}
-                        alt="mainlogo"
-                        className="mr-2 h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 md:h-12 lg:h-14"
-                    />
-                </Link>
+                <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-green to-brand-green-deep text-white shadow-md">
+                            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 11l9-8 9 8" />
+                                <path d="M5 10v10h14V10" />
+                                <path d="M9 20v-6h6v6" />
+                            </svg>
+                        </span>
+                        <span className="font-serif text-2xl font-bold text-brand-ink">Setudown<span className="text-brand-gold">.</span></span>
+                    </Link>
 
-                {/* Desktop Menu */}
-                <ul className="hidden items-center space-x-1 md:flex">
-                    {links.map(({ id, href, title, to, external }) => (
-                        <li key={id} className="relative">
-                            {to ? (
-                                <ScrollLink
-                                    to={to}
-                                    smooth={true}
-                                    duration={500}
-                                    className="group relative cursor-pointer px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:text-blue-800"
-                                >
-                                    {title}
-                                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-800 transition-all duration-300 group-hover:left-1/10 group-hover:w-4/5"></span>
-                                </ScrollLink>
-                            ) : external ? (
-                                // External links (like blog) use regular anchor tag
-                                <a
-                                    href={href}
-                                    className="group relative cursor-pointer px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:text-blue-800"
-                                >
-                                    {title}
-                                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-800 transition-all duration-300 group-hover:left-1/10 group-hover:w-4/5"></span>
-                                </a>
-                            ) : (
-                                // Internal links use Inertia Link
+                    {/* Desktop Links */}
+                    <ul className="hidden items-center gap-1 md:flex">
+                        {navLinks.map((link) => (
+                            <li key={link.href}>
                                 <Link
-                                    href={href}
-                                    className="group relative cursor-pointer px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:text-blue-800"
+                                    href={link.href}
+                                    className="relative rounded-md px-3 py-2 text-sm font-medium text-brand-text/80 transition hover:text-brand-ink hover:bg-brand-cream-light"
                                 >
-                                    {title}
-                                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 bg-blue-800 transition-all duration-300 group-hover:left-1/10 group-hover:w-4/5"></span>
+                                    {link.label}
                                 </Link>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+                            </li>
+                        ))}
+                    </ul>
 
-                {/* Contact button */}
-                <a
-                    href="tel:+2348165608778"
-                    className="group hidden items-center justify-center gap-2 rounded-md bg-green-500 px-4 py-2.5 text-white transition-all duration-300 hover:bg-blue-950 md:flex"
-                >
-                    <Icon iconNode={Phone} className="size-5 transition-transform duration-300 group-hover:scale-110" />
-                    <div className="flex flex-col items-start text-sm">
-                        <span className="font-medium">Contact Us</span>
-                        <span className="text-xs">+234 816 560 8778</span>
+                    {/* Desktop CTA */}
+                    <div className="hidden items-center gap-3 md:flex">
+                        <a
+                            href="tel:+2348165608778"
+                            className="flex items-center gap-2 rounded-full border border-brand-green/30 px-4 py-2 text-sm font-medium text-brand-green-deep transition hover:bg-brand-green hover:text-white hover:border-brand-green"
+                        >
+                            <Phone size={16} />
+                            <span>+234 816 560 8778</span>
+                        </a>
+                        <Link
+                            href="/contact"
+                            className="rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-5 py-2 text-sm font-semibold text-brand-ink transition hover:shadow-lg hover:shadow-brand-gold/30"
+                        >
+                            Book Free Call
+                        </Link>
                     </div>
-                </a>
 
-                {/* Mobile Menu Toggle */}
-                <div
-                    onClick={() => setNav(!nav)}
-                    className="z-10 cursor-pointer rounded-md p-2 text-blue-950 transition-colors duration-300 hover:bg-gray-100 md:hidden"
-                >
-                    {nav ? <FaTimes size={24} /> : <FaBars size={24} />}
+                    {/* Mobile menu toggle */}
+                    <button
+                        onClick={() => setNavOpen(!navOpen)}
+                        className="rounded-md p-2 text-brand-ink transition hover:bg-brand-cream-light md:hidden"
+                        aria-label="Toggle menu"
+                    >
+                        {navOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                 </div>
-            </div>
+            </nav>
 
             {/* Mobile Menu Overlay */}
-            <div className={`fixed inset-0 z-40 transition-opacity duration-500 md:hidden ${nav ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+            <div
+                className={`fixed inset-0 z-40 transition-all duration-300 md:hidden ${
+                    navOpen ? 'visible opacity-100' : 'invisible opacity-0'
+                }`}
+            >
                 {/* Backdrop */}
                 <div
-                    className={`absolute inset-0 bg-black transition-opacity duration-500 ${nav ? 'opacity-50' : 'opacity-0'}`}
-                    onClick={() => setNav(false)}
-                ></div>
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                    onClick={closeMenu}
+                />
 
-                {/* Menu panel */}
+                {/* Panel */}
                 <div
-                    className={`absolute top-0 right-0 h-full w-80 max-w-full transform bg-white shadow-xl transition-transform duration-500 ease-in-out ${nav ? 'translate-x-0' : 'translate-x-full'}`}
+                    className={`absolute right-0 top-0 h-full w-80 max-w-full transform bg-white shadow-2xl transition-transform duration-300 ease-in-out ${
+                        navOpen ? 'translate-x-0' : 'translate-x-full'
+                    }`}
                 >
                     <div className="flex h-full flex-col">
-                        {/* Menu header */}
-                        <div className="flex items-center justify-between border-b p-6">
-                            <h2 className="text-xl font-semibold text-blue-950">Menu</h2>
-                            <button onClick={() => setNav(false)} className="rounded-full p-2 transition-colors duration-300 hover:bg-gray-100">
-                                <FaTimes size={20} className="text-blue-950" />
+                        {/* Header */}
+                        <div className="flex items-center justify-between border-b border-brand-cream-light p-4">
+                            <span className="font-serif text-xl font-bold text-brand-ink">Menu</span>
+                            <button
+                                onClick={closeMenu}
+                                className="rounded-md p-2 text-brand-ink transition hover:bg-brand-cream-light"
+                            >
+                                <X size={20} />
                             </button>
                         </div>
 
-                        {/* Menu items */}
-                        <nav className="flex-1 overflow-y-auto p-6">
-                            <ul className="space-y-4">
-                                {links.map(({ id, href, title, to, external }) => (
-                                    <li key={id}>
-                                        {to ? (
-                                            <ScrollLink
-                                                to={to}
-                                                smooth={true}
-                                                duration={500}
-                                                className="block rounded-md px-4 py-3 text-lg font-medium text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-800"
-                                                onClick={() => scrollTo(to)}
-                                            >
-                                                {title}
-                                            </ScrollLink>
-                                        ) : external ? (
-                                            // External links (like blog) use regular anchor tag
-                                            <a
-                                                href={href}
-                                                className="block rounded-md px-4 py-3 text-lg font-medium text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-800"
-                                                onClick={() => setNav(false)}
-                                            >
-                                                {title}
-                                            </a>
-                                        ) : (
-                                            // Internal links use Inertia Link
-                                            <Link
-                                                href={href}
-                                                className="block rounded-md px-4 py-3 text-lg font-medium text-gray-700 transition-all duration-300 hover:bg-blue-50 hover:text-blue-800"
-                                                onClick={() => setNav(false)}
-                                            >
-                                                {title}
-                                            </Link>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav>
+                        {/* Links */}
+                        <ul className="flex-1 overflow-y-auto p-4 space-y-1">
+                            {navLinks.map((link) => (
+                                <li key={link.href}>
+                                    <Link
+                                        href={link.href}
+                                        className="block rounded-md px-4 py-3 text-base font-medium text-brand-text/80 transition hover:bg-brand-cream-light hover:text-brand-ink"
+                                        onClick={closeMenu}
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
 
-                        {/* Mobile contact section */}
-                        <div className="border-t p-6">
-                            <div className="mb-4 flex items-center gap-3">
-                                <a href="#" className="rounded-full bg-gray-100 p-2 transition-colors duration-300 hover:bg-blue-100">
-                                    <Icon iconNode={Twitter} className="size-5 text-blue-950" />
+                        {/* Bottom – Contact & Socials */}
+                        <div className="border-t border-brand-cream-light p-4">
+                            <div className="flex items-center gap-3 mb-4">
+                                <a
+                                    href="https://www.instagram.com/setudown"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full bg-brand-cream-light p-2 text-brand-muted transition hover:bg-brand-cream hover:text-brand-green"
+                                >
+                                    <Instagram size={20} />
                                 </a>
-                                <a href="#" className="rounded-full bg-gray-100 p-2 transition-colors duration-300 hover:bg-blue-100">
-                                    <Icon iconNode={Linkedin} className="size-5 text-blue-950" />
+                                {/* <a
+                                    href="https://www.tiktok.com/@setudown"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full bg-brand-cream-light p-2 text-brand-muted transition hover:bg-brand-cream hover:text-brand-green"
+                                >
+                                    <TikTok size={20} />
+                                </a> */}
+                                <a
+                                    href="https://www.linkedin.com/company/setudown"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full bg-brand-cream-light p-2 text-brand-muted transition hover:bg-brand-cream hover:text-brand-green"
+                                >
+                                    <Linkedin size={20} />
+                                </a>
+                                <a
+                                    href="https://www.facebook.com/setudown"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full bg-brand-cream-light p-2 text-brand-muted transition hover:bg-brand-cream hover:text-brand-green"
+                                >
+                                    <Facebook size={20} />
+                                </a>
+                                <a
+                                    href="https://wa.me/2348165608778"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded-full bg-brand-cream-light p-2 text-brand-muted transition hover:bg-brand-cream hover:text-brand-green"
+                                >
+                                    <MessageCircle size={20} />
                                 </a>
                             </div>
-                            <button className="flex w-full items-center justify-center gap-3 rounded-md bg-blue-800 px-4 py-3 text-white transition-all duration-300 hover:bg-blue-700">
-                                <Icon iconNode={Phone} className="size-5" />
-                                <div className="flex flex-col items-start text-sm">
-                                    <span className="font-medium">Contact Us</span>
-                                    <span className="text-xs">+234 816 560 8778</span>
-                                </div>
-                            </button>
+                            <Link
+                                href="/contact"
+                                className="flex w-full items-center justify-center rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-4 py-3 font-semibold text-brand-ink transition hover:shadow-lg hover:shadow-brand-gold/30"
+                                onClick={closeMenu}
+                            >
+                                Book Free Discovery Call
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </header>
     );
 };
 

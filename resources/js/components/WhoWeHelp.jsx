@@ -1,29 +1,30 @@
 import { motion } from 'framer-motion';
+import { Globe, Users, Building, Plane } from 'lucide-react';
 
 export default function WhoWeHelp() {
     const audienceTypes = [
         {
             title: 'Individuals & Professionals',
             description: 'Moving abroad, coming home, or relocating within Nigeria? We support your personal journey.',
-            icon: '🌍',
+            icon: <Globe size={28} color="var(--green-deep)" strokeWidth={1.6} />,
             features: ['Personalised move plans', 'Housing search', 'Local support services'],
         },
         {
             title: 'Families',
             description: 'Relocation support for parents, children and partners who need structure and peace of mind.',
-            icon: '👨‍👩‍👧‍👦',
+            icon: <Users size={28} color="var(--green-deep)" strokeWidth={1.6} />,
             features: ['School search', 'Family-friendly neighbourhoods', 'Household setup'],
         },
         {
             title: 'HR & Mobility Teams',
             description: 'Corporate moves made easier for domestic transfers, inbound arrivals and outbound assignments.',
-            icon: '🏢',
+            icon: <Building size={28} color="var(--green-deep)" strokeWidth={1.6} />,
             features: ['Domestic moves', 'Inbound employee support', 'Outbound relocation strategy'],
         },
         {
             title: 'Returnees & Expats',
             description: 'Experienced support for people arriving from abroad or returning to Nigeria after time away.',
-            icon: '✈️',
+            icon: <Plane size={28} color="var(--green-deep)" strokeWidth={1.6} />,
             features: ['Cultural reintegration', 'Safety orientation', 'Community introductions'],
         },
     ];

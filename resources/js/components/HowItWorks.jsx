@@ -1,40 +1,50 @@
 // resources/js/components/HowItWorks.jsx
 import { motion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
 
 export default function HowItWorks() {
     const steps = [
         {
             number: '01',
             title: 'Tell us about your move',
-            description: "Fill our short intake form. Are you moving abroad, to Nigeria, or within the country? What's your timeline?",
+            description: "A short intake call. Where are you going, who's coming, and what's your timeline?",
         },
         {
             number: '02',
             title: 'Choose your plan',
-            description: "We'll recommend a package—or build one from scratch to match your relocation direction.",
+            description: 'We recommend a package — or build one from scratch around your exact needs.',
         },
         {
             number: '03',
             title: 'We handle everything',
-            description: 'From airport pickup to utility setup and transport coordination, we make your first weeks easier.',
+            description: 'Housing, logistics, documents, setup and trusted partners — coordinated for you.',
         },
         {
             number: '04',
-            title: 'You settle in',
-            description: 'Move with clarity and confidence—whether abroad, back home, or to a new city.',
+            title: 'You settle down',
+            description: 'Live, work and thrive in your new home — without the chaos, scams or regret.',
         },
     ];
 
     return (
-        <section id="how-it-works" className="bg-gray-50 py-20">
+        <section id="how-it-works" className="bg-brand-cream-light py-20">
             <div className="mx-auto max-w-7xl px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">Here’s how we make every move feel planned.</h2>
+                    <span className="inline-block text-xs font-semibold uppercase tracking-widest text-brand-green">
+                        The Setudown Way
+                    </span>
+                    <h2 className="mt-2 font-serif text-4xl font-bold text-brand-ink md:text-5xl">
+                        Here's how we get you settled
+                    </h2>
+                    <p className="mt-3 text-lg text-brand-muted">
+                        One calm, guided process — whichever direction you're heading.
+                    </p>
                 </motion.div>
 
                 <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -45,13 +55,17 @@ export default function HowItWorks() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="text-center"
+                            className="group rounded-2xl bg-white p-7 text-center shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
                         >
-                            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">
+                            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-xl bg-brand-green text-2xl font-bold text-white shadow-lg shadow-brand-green/30 transition-colors group-hover:bg-brand-green-deep">
                                 {step.number}
                             </div>
-                            <h3 className="mb-3 text-xl font-semibold text-gray-900">{step.title}</h3>
-                            <p className="text-gray-600">{step.description}</p>
+                            <h3 className="mb-3 font-serif text-xl font-semibold text-brand-ink">
+                                {step.title}
+                            </h3>
+                            <p className="text-brand-muted text-sm leading-relaxed">
+                                {step.description}
+                            </p>
                         </motion.div>
                     ))}
                 </div>
@@ -61,18 +75,14 @@ export default function HowItWorks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 }}
-                    className="mt-12 text-center"
+                    className="mt-14 text-center"
                 >
-                    <motion.a
-                        href="http://wa.me/2348165608778"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-8 py-3.5 font-semibold text-brand-ink transition-all hover:shadow-lg hover:shadow-brand-gold/30"
                     >
                         Start My Move
-                    </motion.a>
+                    </Link>
                 </motion.div>
             </div>
         </section>

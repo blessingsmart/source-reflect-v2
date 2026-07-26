@@ -1,178 +1,115 @@
+// resources/js/components/PainPoints.jsx
 import { motion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
+import { Check, ChevronRight } from 'lucide-react';
 
 export default function PainPoints() {
+    const advantages = [
+        {
+            text: 'One coordinator across every step — no chasing five different people.',
+        },
+        {
+            text: 'A vetted partner network for visas & immigration — we guide, and connect you to trusted experts.',
+        },
+        {
+            text: 'Local insight you can\'t Google — safe areas, real prices, and how not to get scammed.',
+        },
+        {
+            text: 'Priced in Naira and US Dollars — built for locals and international clients alike.',
+        },
+    ];
+
     return (
-        <section className="bg-gradient-to-br from-gray-50 to-white py-24">
-            <div className="mx-auto max-w-7xl px-6">
-                {/* Main Heading */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-20 text-center"
-                >
-                    <h2 className="mb-8 text-5xl leading-tight font-bold text-gray-900">Moving anywhere can feel overwhelming.</h2>
+        <section className="relative overflow-hidden bg-brand-ink py-20 text-white md:py-28">
+            {/* Decorative glow */}
+            <div className="absolute -top-40 -right-40 h-[560px] w-[560px] rounded-full bg-brand-gold/10 blur-3xl" />
+            <div className="absolute -bottom-40 -left-40 h-[560px] w-[560px] rounded-full bg-brand-green/10 blur-3xl" />
 
-                    {/* Pain Points Grid */}
-                    <div className="mx-auto grid max-w-6xl gap-8 text-left md:grid-cols-3">
+            <div className="relative z-10 mx-auto max-w-7xl px-6">
+                <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+                    {/* Left column */}
+                    <div>
                         <motion.div
-                            whileHover={{ scale: 1.02, y: -5 }}
-                            transition={{ type: 'spring', stiffness: 300 }}
-                            className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
                         >
-                            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-red-100 opacity-20"></div>
-                            <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600">
-                                    <span className="text-2xl">🏠</span>
-                                </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know where to live.</h3>
-                                <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Safe neighbourhoods, commute times, schools and local services for your next step.
-                                </p>
-                            </div>
+                            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-brand-gold">
+                                The one-stop advantage
+                            </span>
+                            <h2 className="mt-4 font-serif text-4xl font-bold leading-tight text-white md:text-5xl">
+                                One trusted partner for the <em className="not-italic text-brand-gold-bright">whole</em> journey.
+                            </h2>
+                            <p className="mt-4 text-lg text-white/80">
+                                Most people relocating juggle a visa agent, a mover, a landlord and a "where will I sleep when I land?"
+                                problem — all separately, all strangers. Setudown brings it under one roof.
+                            </p>
                         </motion.div>
 
+                        {/* Advantages list */}
+                        <motion.ul
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="mt-8 space-y-4"
+                        >
+                            {advantages.map((item, index) => (
+                                <motion.li
+                                    key={index}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.1 * (index + 1) }}
+                                    className="flex gap-4 text-base text-white/90"
+                                >
+                                    <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-green/90">
+                                        <Check size={14} strokeWidth={3} className="text-white" />
+                                    </span>
+                                    {item.text}
+                                </motion.li>
+                            ))}
+                        </motion.ul>
+
+                        {/* Optional CTA link (can be removed if you prefer) */}
                         <motion.div
-                            whileHover={{ scale: 1.02, y: -5 }}
-                            transition={{ type: 'spring', stiffness: 300 }}
-                            className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="mt-10"
                         >
-                            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-orange-100 opacity-20"></div>
-                            <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-blue-900">
-                                    <span className="text-2xl">🤝</span>
-                                </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-blue-900">You don't know who to trust.</h3>
-                                <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Trusted vendors, local advisors and compliance-ready partners for every move.
-                                </p>
-                            </div>
-                        </motion.div>
-
-                        <motion.div
-                            whileHover={{ scale: 1.02, y: -5 }}
-                            transition={{ type: 'spring', stiffness: 300 }}
-                            className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:shadow-2xl"
-                        >
-                            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-purple-100 opacity-20"></div>
-                            <div className="relative z-10">
-                                <div className="mb-4 inline-flex h-16 w-16 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-600">
-                                    <span className="text-2xl">❓</span>
-                                </div>
-                                <h3 className="mb-4 text-2xl leading-relaxed font-bold text-green-600">You don't know what you don't know.</h3>
-                                <p className="text-gray-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    Cultural expectations, safety protocols, hidden costs and local process.
-                                </p>
-                            </div>
-                        </motion.div>
-                    </div>
-                </motion.div>
-
-                {/* Solution Section */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-center"
-                >
-                    <div className="relative mb-12">
-                        <motion.h3
-                            initial={{ scale: 0.9 }}
-                            whileInView={{ scale: 1 }}
-                            transition={{ type: 'spring', stiffness: 200 }}
-                            className="mb-6 text-6xl leading-tight font-bold text-green-600"
-                        >
-                            Helping people move with confidence.
-                        </motion.h3>
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
-                            className="mx-auto max-w-4xl text-2xl leading-relaxed text-gray-700"
-                        >
-                            We help individuals, families and organisations relocate with confidence—across borders, back home, and between cities.
-                        </motion.p>
-                    </div>
-
-                    {/* Trust Builders */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3"
-                    >
-                        {[
-                            { icon: '👤', title: 'Personal Relocation', desc: 'Individual support for every move.' },
-                            { icon: '👨‍👩‍👧‍👦', title: 'Family Relocation', desc: 'Planning and settling support for every household.' },
-                            { icon: '🏢', title: 'Corporate Relocation', desc: 'Employee moves that keep teams productive.' },
-                        ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                whileHover={{ scale: 1.05 }}
-                                className="group rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 p-8 shadow-lg transition-all duration-300 hover:shadow-xl"
+                            <Link
+                                href="/contact"
+                                className="inline-flex items-center gap-2 font-semibold text-brand-gold transition-colors hover:text-brand-gold-bright"
                             >
-                                <div className="mb-4 text-4xl">{item.icon}</div>
-                                <h4 className="mb-3 text-xl font-bold text-gray-900">{item.title}</h4>
-                                <p className="text-sm text-gray-600">{item.desc}</p>
-                                <div className="mt-4 h-1 w-0 bg-gradient-to-r from-green-400 to-emerald-400 transition-all duration-300 group-hover:w-full"></div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
+                                Start your stress‑free move
+                                <ChevronRight size={18} className="transition-transform group-hover:translate-x-1" />
+                            </Link>
+                        </motion.div>
+                    </div>
 
+                    {/* Right column – Quote panel */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.55 }}
-                        className="mx-auto mt-12 max-w-4xl rounded-3xl border border-green-100 bg-white p-8 shadow-xl"
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="flex items-center"
                     >
-                        <p className="text-lg font-semibold text-gray-900">
-                            Helping individuals, families and organisations relocate with confidence.
-                        </p>
-                        <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                            {['Personal Relocation', 'Family Relocation', 'Corporate Relocation', 'Settlement Services', 'Destination Support'].map(
-                                (item) => (
-                                    <div key={item} className="flex items-center gap-3 rounded-2xl bg-green-50 px-4 py-3">
-                                        <span className="text-green-600">✔</span>
-                                        <span className="text-gray-700">{item}</span>
-                                    </div>
-                                ),
-                            )}
+                        <div className="w-full rounded-2xl border border-brand-gold/25 bg-white/5 p-8 backdrop-blur-sm md:p-10">
+                            <div className="font-serif text-6xl leading-none text-brand-gold">“</div>
+                            <blockquote className="mt-2 font-serif text-2xl font-medium italic leading-relaxed text-white md:text-3xl">
+                                You can Google everything and still get everything wrong. We help you get it right the first time.
+                            </blockquote>
+                            <div className="mt-6">
+                                <p className="font-semibold text-brand-gold-bright">The Setudown promise</p>
+                                <p className="text-sm text-white/60">Relocation &amp; settlement concierge</p>
+                            </div>
                         </div>
                     </motion.div>
-
-                    {/* CTA Button */}
-                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-16">
-                        <a href="https://calendly.com/inquiries-setudown/30min" target="_blank" rel="noopener noreferrer">
-                            <motion.button
-                                whileHover={{
-                                    scale: 1.05,
-                                    boxShadow: '0 20px 40px rgba(5, 150, 105, 0.3)',
-                                }}
-                                whileTap={{ scale: 0.95 }}
-                                className="hover:shadow-3xl rounded-xl bg-gradient-to-r from-green-600 to-emerald-600 px-12 py-4 font-bold text-white shadow-2xl transition-all duration-300"
-                            >
-                                <span className="flex items-center justify-center gap-3">
-                                    Let's Talk — Book Free Discovery Call
-                                    <svg
-                                        className="h-5 w-5 transition-transform group-hover:translate-x-1"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                    </svg>
-                                </span>
-                            </motion.button>
-                        </a>
-                        <p className="mt-4 text-sm text-gray-500">No obligation • 30-minute consultation • Get personalized advice</p>
-                    </motion.div>
-                </motion.div>
-
-                {/* Decorative Elements */}
-                <div className="absolute top-1/4 left-10 h-32 w-32 rounded-full bg-green-200 opacity-20 blur-xl"></div>
-                <div className="absolute right-10 bottom-1/4 h-40 w-40 rounded-full bg-blue-200 opacity-20 blur-xl"></div>
+                </div>
             </div>
         </section>
     );

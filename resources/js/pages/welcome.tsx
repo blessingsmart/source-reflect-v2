@@ -1,6 +1,6 @@
 // resources/js/pages/Home.jsx
 import ContactForm from '@/components/ContactForm';
-import CulturalOrientation from '@/components/CulturalOrientation';
+import Services from '@/components/Services';         // <-- new import
 import DirectionSelector from '@/components/DirectionSelector';
 import FAQ from '@/components/FAQ';
 import BlogPreview from '@/components/BlogPreview';
@@ -10,7 +10,7 @@ import Packages from '@/components/Packages';
 import PainPoints from '@/components/PainPoints';
 // import Partners from '@/components/Partners';
 import Testimonials from '@/components/Testimonials';
-import WhoWeHelp from '@/components/WhoWeHelp';
+// import WhoWeHelp from '@/components/WhoWeHelp';   // <-- removed
 import GuestLayout from '@/layouts/guest-layout';
 import { Head, usePage } from '@inertiajs/react';
 
@@ -28,8 +28,8 @@ export default function Home() {
             <PainPoints />
             <HowItWorks />
             <Packages />
-            <WhoWeHelp />
-            <CulturalOrientation />
+            {/* <WhoWeHelp />  removed */}
+            <Services />                       {/* <-- new */}
             <Testimonials />
             <BlogPreview />
             <FAQ />
