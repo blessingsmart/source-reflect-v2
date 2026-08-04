@@ -140,7 +140,7 @@ export default function DirectionSelector() {
                             </p>
                         </div>
                         <Link
-                            href="/corporate"
+                            href="mailto:inquiries@setudown.com"
                             className="inline-flex shrink-0 items-center rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-6 py-3 font-semibold text-brand-ink transition-all hover:shadow-lg hover:shadow-brand-gold/20"
                         >
                             Talk to our corporate team

@@ -56,7 +56,7 @@ const Hero = () => {
                             Book Your Free Discovery Call
                         </motion.button>
                     </Link>
-                    <Link href="#packages">
+                    <Link href="#how-it-works">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}

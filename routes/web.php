@@ -41,6 +41,18 @@ Route::get('/services', function () {
     return Inertia::render('Services');
 })->name('Services');
 
+Route::get('/moving-abroad', function () {
+    return Inertia::render('MovingAbroad');
+})->name('moving-abroad');
+
+Route::get('/moving-to-nigeria', function () {
+    return Inertia::render('MovingToNigeria');
+})->name('moving-to-nigeria');
+
+Route::get('/moving-within-nigeria', function () {
+    return Inertia::render('MovingWithinNigeria');
+})->name('moving-within-nigeria');
+
 // Public Blog Routes
 Route::get('/blog', [PostController::class, 'blogpost'])->name('blog');
 Route::get('/post/{post:slug}', [PublicController::class, 'viewpost'])->name('single.post');
@@ -53,14 +65,14 @@ Route::get('/health-check', function () {
 });
 
 // Auth Routes
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Settings Routes
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
 
 // Authenticated User Routes
 Route::middleware(['auth'])->group(function () {
-    
+
     // Dashboard
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
@@ -80,14 +92,14 @@ Route::middleware(['auth'])->group(function () {
     // User Profile
     Route::controller(ProfileController::class)
         ->middleware('can:view,user')
-        ->group(function(){
+        ->group(function () {
             Route::get('/user/{user:slug}', 'Home')->name('profile');
             Route::get('/user/{user:slug}/activity', 'activity')->name('profile.activity');
             Route::get('/user/{user:slug}/about', 'aboutme')->name('profile.aboutme');
         });
 
     // User Settings
-    Route::controller(UserSettingController::class)->group(function(){
+    Route::controller(UserSettingController::class)->group(function () {
         Route::get('/edit-profile/{user:slug}', 'editprofilepage')
             ->middleware('password.confirm')
             ->name('editprofile');
@@ -104,7 +116,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Profile Media
-    Route::controller(EditProfileController::class)->group(function(){
+    Route::controller(EditProfileController::class)->group(function () {
         Route::get('/edit-avatar/{user}', 'editavatarpage')->name('edit.avatarpage');
         Route::put('/edit-avatar/{user}/edit', 'editavatar')->name('edit.avatar');
         Route::delete('/delete-avatar/{user}', 'destroyavatar')->name('delete.avatar');
@@ -134,7 +146,7 @@ Route::middleware(['auth'])->group(function () {
 Route::prefix('admin')
     ->middleware(['auth', 'can:makeAdminActions'])
     ->group(function () {
-        Route::controller(AdminController::class)->group(function(){
+        Route::controller(AdminController::class)->group(function () {
             Route::get('/panel', 'admin')->name("admin-page");
             Route::get('/users', 'users')->name('admin.users');
             Route::get('/posts', 'posts')->name('admin.posts');
@@ -148,20 +160,20 @@ Route::prefix('admin')
             Route::put('/role-update/{user}', 'role')->name('role.update');
             Route::put('/toggle/block/{user}', 'toggle_block')->name('toggle.block');
         });
-        
-        Route::controller(TagsController::class)->group(function(){
+
+        Route::controller(TagsController::class)->group(function () {
             Route::get('/hashtags', 'hashtagpage')->name('hashtagpage');
             Route::post('/create/tag', 'create_tag')->name('create.hashtag');
             Route::put('/edit/{hashtag}', 'edit_tag')->name('edit.hashtag');
             Route::delete('/delete/{hashtag}', 'delete_tag')->name('delete.hashtag');
         });
-        
+
         Route::resource('roles', RolesController::class);
         Route::resource('permissions', PermissionsController::class);
         Route::delete('/admin/delete/{user}', [AdminController::class, 'destroy'])->name('delete.user');
         Route::get('/notifications', [NotificationsController::class, 'notifications'])->name('admin.notify');
-        
-        Route::controller(SettingController::class)->group(function(){
+
+        Route::controller(SettingController::class)->group(function () {
             Route::get('/settings', 'settings')->name('admin.settings');
             Route::put('/settings/{user}', 'update_settings')->name('admin.update');
             Route::put('/settings-pass/{user}', 'update_pass')->name('admin.pass');
