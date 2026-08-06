@@ -53,6 +53,10 @@ Route::get('/moving-within-nigeria', function () {
     return Inertia::render('MovingWithinNigeria');
 })->name('moving-within-nigeria');
 
+Route::get('/corporate', function () {
+    return Inertia::render('Corporate');
+})->name('corporate');
+
 // Public Blog Routes
 Route::get('/blog', [PostController::class, 'blogpost'])->name('blog');
 Route::get('/post/{post:slug}', [PublicController::class, 'viewpost'])->name('single.post');

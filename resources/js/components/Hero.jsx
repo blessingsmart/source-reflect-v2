@@ -29,7 +29,7 @@ const Hero = () => {
                     transition={{ duration: 0.8 }}
                     className="mb-6 font-serif text-4xl font-bold md:text-5xl lg:text-6xl leading-tight"
                 >
-                    Wherever you're moving, we'll help you <em className="not-italic text-brand-gold-bright">settle down.</em>
+                    Wherever you are moving, we will help you <em className="not-italic text-brand-gold-bright">settle down.</em>
                 </motion.h1>
 
                 <motion.p

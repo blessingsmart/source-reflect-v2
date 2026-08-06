@@ -1,6 +1,5 @@
-// resources/js/components/BlogPreview.jsx
-import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { Link } from '@inertiajs/react';
 
 const articles = [
     {
@@ -41,7 +40,7 @@ export default function BlogPreview() {
                         Insights &amp; guides
                     </span>
                     <h2 className="mt-2 font-serif text-4xl font-bold text-brand-ink md:text-5xl">
-                        Relocation know-how, whichever way you're going
+                        Relocation know-how, whichever way you are going
                     </h2>
                 </motion.div>
 
@@ -86,12 +85,12 @@ export default function BlogPreview() {
                     transition={{ delay: 0.4 }}
                     className="mt-14 text-center"
                 >
-                    <Link
+                    <a
                         href="/blog"
                         className="inline-flex items-center rounded-full border border-brand-green/40 px-8 py-3 font-semibold text-brand-green-deep transition-all hover:bg-brand-green hover:text-white"
                     >
                         Read the blog
-                    </Link>
+                    </a>
                 </motion.div>
             </div>
         </section>

@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Services\PostService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -30,19 +31,20 @@ class PostController extends Controller
         $query = $request->get('search');
         $sortoption = $request->get('sort', 'latest');
 
-        // Base query for published posts only
+        // Base query for published posts only (assuming you have a status field)
         $postsQuery = Post::query()
             ->with(['user:id,username,avatar', 'hashtags:id,name'])
-            ->withCount(['likes', 'comments as totalcomments_count']);
+            ->withCount(['likes', 'comments as totalcomments_count'])
+            ->where('status', 'published'); // Adjust if your status field is different
 
         // Apply search if provided
         if ($query) {
-            $postsQuery->where(function($q) use ($query) {
+            $postsQuery->where(function ($q) use ($query) {
                 $q->where('title', 'like', "%{$query}%")
-                  ->orWhere('description', 'like', "%{$query}%")
-                  ->orWhereHas('hashtags', function($q) use ($query) {
-                      $q->where('name', 'like', "%{$query}%");
-                  });
+                    ->orWhere('description', 'like', "%{$query}%")
+                    ->orWhereHas('hashtags', function ($q) use ($query) {
+                        $q->where('name', 'like', "%{$query}%");
+                    });
             });
         }
 
@@ -69,7 +71,6 @@ class PostController extends Controller
                 $postsQuery->latest();
                 break;
             case 'hashtagtrend':
-                // Sort by posts with most hashtags (trending topics)
                 $postsQuery->withCount('hashtags')
                     ->orderBy('hashtags_count', 'desc')
                     ->latest();
@@ -80,28 +81,23 @@ class PostController extends Controller
                 break;
         }
 
-        $posts = $postsQuery->paginate(12);
+        // Paginate results (9 per page as per your component)
+        $posts = $postsQuery->paginate(9);
 
-        // Get popular tags for public display
-        $hashtags = Hashtag::withCount(['posts' => function($query) {
-            $query->where('status', 'published'); // Only count published posts
+        // Get popular tags with post counts
+        $tags = Hashtag::withCount(['posts' => function ($query) {
+            $query->where('status', 'published');
         }])
-        ->orderBy('posts_count', 'desc')
-        ->limit(20)
-        ->get();
+            ->orderBy('posts_count', 'desc')
+            ->limit(20)
+            ->get();
 
-        // For authenticated users, include additional data
-        $authFollowings = [];
-        if (Auth::check()) {
-            $authFollowings = Auth::user()->followings()->pluck('users.id')->toArray();
-        }
-
-        return view('blog', [
-            'tags' => $hashtags,
+        // Return Inertia response
+        return Inertia::render('Blog', [
             'posts' => $posts,
+            'tags' => $tags,
             'sort' => $sortoption,
-            'authFollowings' => $authFollowings,
-            'search' => $query
+            'search' => $query, // optional, for preserving search state
         ]);
     }
 
@@ -126,9 +122,9 @@ class PostController extends Controller
     {
         $dto = CreatePostDTO::fromAppRequest($request);
         $service->create($dto);
-        
+
         session()->flash('success', 'Posted successfully');
-        
+
         return redirect('/blog');
     }
 
@@ -154,7 +150,7 @@ class PostController extends Controller
 
         $hashtags = $post->hashtags()->pluck('name')->implode(', ');
         $allhashtags = Hashtag::pluck('name');
-        
+
         return view('updatepost', [
             'post' => $post,
             'hashtags' => $hashtags,
@@ -188,10 +184,10 @@ class PostController extends Controller
                 $like->delete();
                 $post->decrement('likes_count');
             }
-        
+
             return response()->json(['liked' => false]);
         }
-        
+
         $post->likes()->create(['user_id' => auth()->user()->id]);
         $post->increment('likes_count');
 
@@ -209,9 +205,9 @@ class PostController extends Controller
         $fields = $request->validate([
             'post_id' => 'required|int'
         ]);
-        
+
         $postId = $fields['post_id'];
-        
+
         // Verify post exists and is published
         $post = Post::where('id', $postId)->first();
         if (!$post) {
@@ -236,7 +232,7 @@ class PostController extends Controller
     public function getsavedposts()
     {
         $getposts = session('saved-to', []);
-        
+
         $posts = Post::whereIn('id', $getposts)
             ->withCount(['likes', 'comments'])
             ->with(['user', 'hashtags'])
@@ -253,19 +249,19 @@ class PostController extends Controller
     public function postsByHashtag($hashtagName)
     {
         $hashtag = Hashtag::where('name', $hashtagName)->firstOrFail();
-        
+
         $posts = $hashtag->posts()
             ->with(['user:id,username,avatar', 'hashtags:id,name'])
             ->withCount(['likes', 'comments as totalcomments_count'])
             ->latest()
             ->paginate(12);
 
-        $popularHashtags = Hashtag::withCount(['posts' => function($query) {
+        $popularHashtags = Hashtag::withCount(['posts' => function ($query) {
             $query->where('status', 'published');
         }])
-        ->orderBy('posts_count', 'desc')
-        ->limit(15)
-        ->get();
+            ->orderBy('posts_count', 'desc')
+            ->limit(15)
+            ->get();
 
         return view('hashtag-posts', [
             'hashtag' => $hashtag,

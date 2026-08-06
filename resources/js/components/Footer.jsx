@@ -1,16 +1,29 @@
-// resources/js/components/Footer.jsx
 import { Link } from '@inertiajs/react';
+import logo from '../assets/logo1.png';
 import {
     Instagram,
     Twitter,
     Facebook,
     Linkedin,
     MessageCircle,
-    // TikTok,
     Mail,
     Phone,
     MapPin,
 } from 'lucide-react';
+
+function TikTokIcon(props) {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+            className="h-[18px] w-[18px]"
+            {...props}
+        >
+            <path d="M14.6 3a5.4 5.4 0 0 0 3.9 1.4V7a4.5 4.5 0 0 1-3.3-1.2v7.1a4.6 4.6 0 1 1-4.6-4.6c.3 0 .6 0 .9.1v2.6a2.1 2.1 0 1 0 1.6 2.1V3h1.4Z" />
+        </svg>
+    );
+}
 
 export default function Footer() {
     return (
@@ -20,14 +33,14 @@ export default function Footer() {
                     {/* Brand & About */}
                     <div className="md:col-span-1">
                         <div className="flex items-center gap-2">
-                            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-brand-green to-brand-green-deep text-white shadow-md">
-                                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M3 11l9-8 9 8" />
-                                    <path d="M5 10v10h14V10" />
-                                    <path d="M9 20v-6h6v6" />
-                                </svg>
+                            <span className="flex items-center justify-center rounded-lg text-white shadow-md">
+                            <img
+                                src={logo}
+                                alt="mainlogo"
+                                className="mr-2 h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105 sm:h-10 md:h-12 lg:h-14"
+                            />
                             </span>
-                            <span className="font-serif text-2xl font-bold text-white">Setudown<span className="text-brand-gold">.</span></span>
+                            {/* <span className="font-serif text-2xl font-bold text-white">Setudown<span className="text-brand-gold">.</span></span> */}
                         </div>
                         <p className="mt-4 text-sm leading-relaxed">
                             Helping individuals, families and organisations relocate with ease — abroad, to Nigeria, or across it. Settle down without the stress.
@@ -44,17 +57,17 @@ export default function Footer() {
                             >
                                 <Instagram size={18} />
                             </a>
-                            {/* <a
-                                href="https://www.tiktok.com/@setudown"
+                            <a
+                                href="https://www.tiktok.com/@setu_down"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition hover:border-brand-gold hover:bg-brand-gold/20 hover:text-brand-gold"
                                 aria-label="TikTok"
                             >
-                                <TikTok size={18} />
-                            </a> */}
+                                <TikTokIcon />
+                            </a>
                             <a
-                                href="https://www.linkedin.com/company/setudown"
+                                href="https://www.linkedin.com/in/popoolasamson/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition hover:border-brand-gold hover:bg-brand-gold/20 hover:text-brand-gold"
@@ -63,7 +76,7 @@ export default function Footer() {
                                 <Linkedin size={18} />
                             </a>
                             <a
-                                href="https://www.facebook.com/setudown"
+                                href="https://www.facebook.com/share/1DCADDViy3/?mibextid=wwXIfr"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition hover:border-brand-gold hover:bg-brand-gold/20 hover:text-brand-gold"
@@ -72,7 +85,7 @@ export default function Footer() {
                                 <Facebook size={18} />
                             </a>
                             <a
-                                href="https://x.com/setudown"
+                                href="https://x.com/setudown1"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-white/60 transition hover:border-brand-gold hover:bg-brand-gold/20 hover:text-brand-gold"
@@ -134,9 +147,9 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/blog" className="transition hover:text-brand-gold-bright">
+                                <a href="/blog" className="transition hover:text-brand-gold-bright">
                                     Blog
-                                </Link>
+                                </a>
                             </li>
                             <li>
                                 <Link href="/contact" className="transition hover:text-brand-gold-bright">
@@ -174,7 +187,7 @@ export default function Footer() {
                 <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
                     <p>© {new Date().getFullYear()} Setudown Ltd. All rights reserved.</p>
                     <div className="flex items-center gap-4">
-                        <span className="inline-block rounded-full border border-white/10 px-3 py-1 text-[11px]">RC: 0000000</span>
+                        <span className="inline-block rounded-full border border-white/10 px-3 py-1 text-[11px]">RC: 8788565</span>
                         <span className="inline-block rounded-full border border-white/10 px-3 py-1 text-[11px]">Verified vendors</span>
                         <span className="inline-block rounded-full border border-white/10 px-3 py-1 text-[11px]">Digital-first</span>
                     </div>

@@ -105,7 +105,7 @@ export default function Testimonials() {
                 >
                     <div className="flex flex-col justify-center gap-4 sm:flex-row">
                         <a
-                            href="https://wa.me/2348165608778"
+                            href="https://maps.app.goo.gl/KRdnXdk9DZXqDcDB6"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-8 py-3 font-semibold text-brand-ink transition-all hover:shadow-lg hover:shadow-brand-gold/30"
@@ -113,7 +113,7 @@ export default function Testimonials() {
                             Read More Reviews
                         </a>
                         <a
-                            href="https://wa.me/2348165608778"
+                            href="https://g.page/r/CdlsafcodpR3EBI/review"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="rounded-full border border-brand-green/40 px-8 py-3 font-semibold text-brand-green-deep transition-all hover:bg-brand-green hover:text-white"
