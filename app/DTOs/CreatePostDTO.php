@@ -10,7 +10,7 @@ class CreatePostDTO
     public function __construct(
        public readonly string $title,
        public readonly string $description,
-       public readonly UploadedFile $image,
+       public readonly ?UploadedFile $image = null,
        public readonly ?bool $allowComments,
        public readonly int $userId,
        public readonly ?string $hashtags, 
@@ -20,7 +20,7 @@ class CreatePostDTO
     public static function fromAppRequest(AppCreateRequest $request): CreatePostDTO
     {
         $title = htmlspecialchars(strip_tags($request->validated('title')));
-        $allowComments = $request->boolean('enabled');
+        $allowComments = $request->has('allow_comments') ? $request->boolean('allow_comments') : $request->boolean('enabled');
         $featured = $request->boolean('featured');
        
         return new self(

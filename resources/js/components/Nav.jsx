@@ -42,7 +42,7 @@ const Nav = () => {
     const closeMenu = () => setNavOpen(false);
 
     return (
-        <header className="sticky top-0 z-50">
+        <header className="sticky top-0 z-[100]">
             {/* Announcement bar */}
             <div className="hidden bg-brand-ink px-4 py-2 text-center text-xs text-white/80 sm:block">
                 <span>

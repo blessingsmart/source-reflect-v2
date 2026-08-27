@@ -30,12 +30,13 @@ class CommentController extends Controller
        if(!$post->allow_comments){
         return response()->json([
           'error'=>'comments disabled on post'
-        ]);
+        ], 403);
        }
       $comment = $post->comments()->create($fields);
 
       return response()->json([
         'commented'=>true,
+        'comment' => $comment->load('user:id,name,username,avatar'),
         'html' => view('comments.comments', ['comments' => [$comment]])->render()
       ]);
     }
@@ -51,14 +52,14 @@ public function reply(Comment $comment, Request $request){
     
         return response()->json([
           'error' =>'Cannot reply to your own reply'
-        ]);
+        ], 422);
     }
     // maximum 3 replies allowed
     $replyCount = Comment::where('parent_id',$fields['parent_id'])->count();
     if($replyCount >= 3){
       return response()->json([
         'error' =>'maximum 3 replies'
-      ]);
+      ], 422);
     }
     // reply once to your parent comment
     $selfReplyCount = Comment::where('user_id', auth()->id()) 
@@ -69,7 +70,7 @@ public function reply(Comment $comment, Request $request){
   
     return response()->json([
       'error' =>'You can only reply once to your own comment'
-    ]);
+    ], 422);
 }
       $fields['content']=strip_tags($fields['content']);
       $fields['user_id']=auth()->id();
@@ -81,10 +82,12 @@ public function reply(Comment $comment, Request $request){
 
       return response()->json([
         'replied' => true,
+        'comment' => $reply->load('user:id,name,username,avatar'),
         'html' => view('comments.replies',['comments'=>[$reply]])->render()
       ]);
     }catch (\Exception $e) {
         Log::error('error applying reply :'.$e->getMessage());
+        return response()->json(['error' => 'Unable to submit reply.'], 500);
     }
 }
     public function editcomment(Request $request,Comment $comment){

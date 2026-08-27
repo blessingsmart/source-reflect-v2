@@ -108,10 +108,8 @@ class PostController extends Controller
     {
         $allhashtags = Hashtag::pluck('name');
 
-        $initialTags = old('hashtag') ? explode(',', old('hashtag')) : [];
-        return view('create', [
+        return Inertia::render('CreatePost', [
             'allhashtags' => $allhashtags,
-            'initialTags' => $initialTags,
         ]);
     }
 
@@ -148,10 +146,10 @@ class PostController extends Controller
         $post = Post::whereSlug($slug)->firstOrFail();
         $this->authorize('view', $post);
 
-        $hashtags = $post->hashtags()->pluck('name')->implode(', ');
+        $hashtags = $post->hashtags()->pluck('name')->toArray();
         $allhashtags = Hashtag::pluck('name');
 
-        return view('updatepost', [
+        return Inertia::render('EditPost', [
             'post' => $post,
             'hashtags' => $hashtags,
             'allhashtags' => $allhashtags,
