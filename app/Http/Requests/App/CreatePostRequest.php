@@ -38,7 +38,8 @@ class CreatePostRequest extends FormRequest
             }
           }
     }],
-        'image' => 'nullable|image|mimes:jpg,png,jpeg|max:5120',
+        'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:5120',
+        'allow_comments' => 'nullable|boolean',
         'enabled' => 'nullable|boolean',
         'featured' => 'nullable|boolean',
         ];

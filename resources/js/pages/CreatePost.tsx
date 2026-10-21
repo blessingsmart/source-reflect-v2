@@ -301,6 +301,7 @@ export default function CreatePost({ allhashtags }: CreatePostProps) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         post(route('create'), {
+            forceFormData: true,
             onSuccess: () => {
                 localStorage.removeItem(DRAFT_KEY);
             },

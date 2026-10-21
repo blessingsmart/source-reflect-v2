@@ -594,16 +594,38 @@ export default function Post() {
                         </div>
                     </motion.header>
 
-                    {/* Featured Image */}
-                    {post.image_path && (
-                        <div className="mb-10 overflow-hidden rounded-3xl border border-brand-cream-light bg-brand-cream shadow-sm max-h-[500px]">
+                    {/* Featured Image / Default Cover */}
+                    <div className="mb-10 overflow-hidden rounded-3xl border border-brand-cream-light shadow-sm max-h-[500px] bg-brand-cream">
+                        {post.image_path ? (
                             <img
                                 src={`/storage/uploads/${post.image_path}`}
                                 alt={post.title}
                                 className="w-full h-full object-cover"
+                                onError={(e) => {
+                                    // If the image fails to load, show default cover
+                                    e.currentTarget.style.display = 'none';
+                                    const parent = e.currentTarget.parentElement;
+                                    if (parent) {
+                                        parent.classList.remove('bg-brand-cream');
+                                        parent.classList.add('bg-gradient-to-br', 'from-brand-green', 'to-brand-green-deep');
+                                        const fallback = document.createElement('div');
+                                        fallback.className = 'flex flex-col items-center justify-center gap-4 p-12 min-h-[240px]';
+                                        fallback.innerHTML = `<span class="text-6xl font-bold font-serif text-white/70">${post.title.charAt(0).toUpperCase()}</span><span class="text-sm font-medium text-white/60 text-center max-w-sm">${post.title}</span>`;
+                                        parent.appendChild(fallback);
+                                    }
+                                }}
                             />
-                        </div>
-                    )}
+                        ) : (
+                            <div className="flex flex-col items-center justify-center gap-4 bg-gradient-to-br from-brand-green to-brand-green-deep p-12 min-h-[240px]">
+                                <span className="text-6xl font-bold font-serif text-white/70">
+                                    {post.title.charAt(0).toUpperCase()}
+                                </span>
+                                <span className="text-sm font-medium text-white/60 text-center max-w-sm">
+                                    {post.title}
+                                </span>
+                            </div>
+                        )}
+                    </div>
 
                     {/* Post Content (Isolated to prevent rogue HTML/styles from escaping) */}
                     <div className="relative isolate overflow-hidden rounded-3xl bg-white p-6 sm:p-10 border border-brand-cream-light shadow-sm mb-8">
@@ -1009,16 +1031,29 @@ export default function Post() {
                                         className="group overflow-hidden rounded-2xl border border-brand-cream-light bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
                                     >
                                         <div>
-                                            <div className="h-40 overflow-hidden bg-brand-green/10">
+                                            <div className="h-40 overflow-hidden">
                                                 {article.image_path ? (
                                                     <img
                                                         src={`/storage/uploads/${article.image_path}`}
                                                         alt={article.title}
                                                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                        onError={(e) => {
+                                                            e.currentTarget.style.display = 'none';
+                                                            const parent = e.currentTarget.parentElement;
+                                                            if (parent) {
+                                                                parent.classList.add('bg-gradient-to-br', 'from-brand-green', 'to-brand-green-deep');
+                                                                const fallback = document.createElement('div');
+                                                                fallback.className = 'flex h-full w-full flex-col items-center justify-center gap-1';
+                                                                fallback.innerHTML = `<span class="text-3xl font-bold text-white/70">${article.title.charAt(0).toUpperCase()}</span>`;
+                                                                parent.appendChild(fallback);
+                                                            }
+                                                        }}
                                                     />
                                                 ) : (
-                                                    <div className="flex h-full w-full items-center justify-center text-brand-green/40">
-                                                        <Tag size={36} />
+                                                    <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-brand-green to-brand-green-deep gap-1">
+                                                        <span className="text-3xl font-bold text-white/70">
+                                                            {article.title.charAt(0).toUpperCase()}
+                                                        </span>
                                                     </div>
                                                 )}
                                             </div>

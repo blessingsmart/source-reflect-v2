@@ -240,16 +240,34 @@ export default function Blog() {
                                     className="group overflow-hidden rounded-2xl border border-brand-cream-light bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
                                 >
                                     {/* Post Image */}
-                                    <div className="relative h-48 overflow-hidden bg-gradient-to-r from-brand-green to-brand-green-deep">
+                                    <div className="relative h-48 overflow-hidden">
                                         {getImageUrl(post) ? (
                                             <img
-                                                src={getImageUrl(post)}
+                                                src={getImageUrl(post) ?? undefined}
                                                 alt={post.title}
                                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                onError={(e) => {
+                                                    // Fallback to default cover on load error
+                                                    const target = e.currentTarget;
+                                                    target.style.display = 'none';
+                                                    const parent = target.parentElement;
+                                                    if (parent) {
+                                                        parent.classList.add('bg-gradient-to-br', 'from-brand-green', 'to-brand-green-deep');
+                                                        const fallback = document.createElement('div');
+                                                        fallback.className = 'flex h-full w-full flex-col items-center justify-center gap-2 p-4';
+                                                        fallback.innerHTML = `<span class="text-4xl font-bold text-white/80">${post.title.charAt(0).toUpperCase()}</span><span class="text-xs font-medium text-white/60 text-center line-clamp-2">${post.title}</span>`;
+                                                        parent.appendChild(fallback);
+                                                    }
+                                                }}
                                             />
                                         ) : (
-                                            <div className="flex h-full w-full items-center justify-center">
-                                                <Newspaper size={48} className="text-white/50" />
+                                            <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-brand-green to-brand-green-deep p-4">
+                                                <span className="text-4xl font-bold text-white/80">
+                                                    {post.title.charAt(0).toUpperCase()}
+                                                </span>
+                                                <span className="text-xs font-medium text-white/60 text-center line-clamp-2">
+                                                    {post.title}
+                                                </span>
                                             </div>
                                         )}
                                         {post.hashtags && post.hashtags.length > 0 && (

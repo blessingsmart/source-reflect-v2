@@ -1,5 +1,5 @@
 import GuestLayout from '@/layouts/guest-layout';
-import { Head, Link, useForm, router } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import React, { useState, useRef } from 'react';
 import {
@@ -35,7 +35,7 @@ interface EditPostProps {
 }
 
 export default function EditPost({ post: existingPost, hashtags: initialTags, allhashtags }: EditPostProps) {
-    const { data, setData, processing, errors } = useForm<{
+    const { data, setData, post, processing, errors } = useForm<{
         title: string;
         description: string;
         hashtag: string;
@@ -244,13 +244,8 @@ export default function EditPost({ post: existingPost, hashtags: initialTags, al
     // Submit handler
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        router.post(route('update.post', existingPost.slug), {
-            _method: 'put',
-            title: data.title,
-            description: data.description,
-            hashtag: data.hashtag,
-            image: data.image,
-            allow_comments: data.allow_comments,
+        post(route('update.post', existingPost.slug), {
+            forceFormData: true,
         });
     };
 
