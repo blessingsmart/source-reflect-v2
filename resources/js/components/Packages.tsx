@@ -1,116 +1,154 @@
 // resources/js/components/Packages.jsx
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Link } from '@inertiajs/react';
+import { Check } from 'lucide-react';
+
+const plans = [
+    {
+        name: 'Basic',
+        priceUSD: '$250–$500',
+        priceNGN: '≈ ₦400k – ₦800k',
+        features: [
+            'Airport pickup',
+            'SIM card + local number',
+            'Orientation guide',
+        ],
+        isPopular: false,
+        ctaText: 'Get Started',
+        ctaLink: '/contact',
+    },
+    {
+        name: 'Standard',
+        priceUSD: '$800–$1,500',
+        priceNGN: '≈ ₦1.3m – ₦2.4m',
+        features: [
+            'Everything in Basic',
+            'Short & long-term housing',
+            'School search & placement',
+            'Local tour + utility setup',
+        ],
+        isPopular: true,
+        ctaText: 'Get Started',
+        ctaLink: '/contact',
+    },
+    {
+        name: 'Premium',
+        priceUSD: '$2,000–$4,000',
+        priceNGN: '≈ ₦3.2m – ₦6.4m',
+        features: [
+            'Everything in Standard',
+            'Admin help (NIN, bank, ID)',
+            'Dedicated relocation rep',
+            'Custom safety briefing',
+        ],
+        isPopular: false,
+        ctaText: 'Get Started',
+        ctaLink: '/contact',
+    },
+    {
+        name: 'Corporate',
+        priceUSD: 'Custom',
+        priceNGN: 'For HR teams, NGOs & multinationals',
+        features: [
+            'Bulk & group relocation',
+            'Corporate housing',
+            'Dedicated liaison',
+            'Visa extension guidance',
+        ],
+        isPopular: false,
+        ctaText: 'Request Pricing',
+        ctaLink: '/contact',
+    },
+];
 
 export default function Packages() {
-    const [selectedPackage, setSelectedPackage] = useState(null);
-
-    const packages = [
-        {
-            name: 'BASIC',
-            price: '$250 – $500',
-            features: ['Airport pickup', 'SIM card + local number', 'Orientation guide'],
-            color: 'green',
-        },
-        {
-            name: 'STANDARD',
-            price: '$800 – $1,500',
-            features: ['All BASIC features', 'Short & long-term accommodation', 'School search & placement', 'Local tour', 'Utility setup'],
-            color: 'blue',
-        },
-        {
-            name: 'PREMIUM',
-            price: '$2,000 – $4,000',
-            features: [
-                'All STANDARD features',
-                'Admin help (NIN, bank setup, ID)',
-                'Dedicated rep',
-                'Custom safety briefing',
-                'Domestic staff placement',
-            ],
-            color: 'purple',
-        },
-        {
-            name: 'CORPORATE',
-            price: 'Custom Pricing',
-            description: 'For HR teams, NGOs, and multinationals',
-            features: ['Bulk relocation', 'Visa extension guidance', 'Dedicated corporate liaison'],
-            color: 'orange',
-        },
-    ];
-
     return (
-        <section id="packages" className="bg-white py-20">
+        <section id="packages" className="bg-brand-cream py-20">
             <div className="mx-auto max-w-7xl px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">One Price. Everything Covered.</h2>
+                    <span className="inline-block text-xs font-semibold uppercase tracking-widest text-brand-green">
+                        Transparent packages
+                    </span>
+                    <h2 className="mt-2 font-serif text-4xl font-bold text-brand-ink md:text-5xl">
+                        One price. Everything covered.
+                    </h2>
+                    <p className="mt-3 text-lg text-brand-muted">
+                        Clear, all-in packages in Naira and Dollars — or build your own around exactly what you need.
+                    </p>
                 </motion.div>
 
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                    {packages.map((pkg, index) => (
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                    {plans.map((plan, index) => (
                         <motion.div
-                            key={index}
+                            key={plan.name}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className={`rounded-xl border-2 p-6 transition-all hover:shadow-lg ${
-                                pkg.color === 'green'
-                                    ? 'border-green-200'
-                                    : pkg.color === 'blue'
-                                      ? 'border-blue-200'
-                                      : pkg.color === 'purple'
-                                        ? 'border-purple-200'
-                                        : 'border-orange-200'
+                            className={`relative flex flex-col rounded-2xl bg-white p-6 shadow-md transition-all hover:-translate-y-1 hover:shadow-xl ${
+                                plan.isPopular
+                                    ? 'border-2 border-brand-green shadow-lg shadow-brand-green/20'
+                                    : 'border border-brand-cream-light'
                             }`}
                         >
-                            <h3 className="mb-2 text-2xl font-bold text-gray-900">{pkg.name}</h3>
-                            <div className="mb-4 text-3xl font-bold text-green-600">{pkg.price}</div>
-                            {pkg.description && <p className="mb-4 text-gray-600">{pkg.description}</p>}
+                            {plan.isPopular && (
+                                <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-brand-gold-bright to-brand-gold px-4 py-1 text-xs font-bold uppercase text-brand-ink shadow-sm">
+                                    Most Popular
+                                </div>
+                            )}
 
-                            <ul className="mb-6 space-y-3">
-                                {pkg.features.map((feature, idx) => (
-                                    <li key={idx} className="flex items-start">
-                                        <span className="mr-2 text-green-500">✓</span>
-                                        <span className="text-gray-700">{feature}</span>
+                            <div className="mb-2 text-sm font-semibold uppercase tracking-wider text-brand-green">
+                                {plan.name}
+                            </div>
+
+                            <div className="font-serif text-3xl font-bold text-brand-ink">
+                                {plan.priceUSD}
+                            </div>
+                            <div className="mt-0.5 text-sm text-brand-muted">
+                                {plan.priceNGN}
+                            </div>
+
+                            <ul className="mt-6 flex-1 space-y-3">
+                                {plan.features.map((feature, idx) => (
+                                    <li key={idx} className="flex items-start gap-2.5 text-sm text-brand-text/80">
+                                        <Check size={18} className="mt-0.5 shrink-0 text-brand-green" strokeWidth={2.5} />
+                                        <span>{feature}</span>
                                     </li>
                                 ))}
                             </ul>
-                            <a href="http://wa.me/2348165608778" target="_blank" rel="noopener noreferrer">
-                                <button className="w-full rounded-lg bg-green-600 py-2 text-white transition-colors hover:bg-green-700">
-                                    Get Started
-                                </button>
-                            </a>
+
+                            <Link
+                                href={plan.ctaLink}
+                                className={`mt-8 w-full rounded-full py-3 text-center font-semibold transition-all ${
+                                    plan.isPopular
+                                        ? 'bg-gradient-to-r from-brand-gold-bright to-brand-gold text-brand-ink hover:shadow-lg hover:shadow-brand-gold/30'
+                                        : 'border border-brand-green/40 text-brand-green-deep hover:bg-brand-green hover:text-white'
+                                }`}
+                            >
+                                {plan.ctaText}
+                            </Link>
                         </motion.div>
                     ))}
                 </div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-12 text-center"
+                    transition={{ delay: 0.4 }}
+                    className="mt-8 text-center text-sm text-brand-muted"
                 >
-                    <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                        <button className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700">
-                            Compare All Packages
-                        </button>
-                        <a
-                            className="rounded-lg border-2 border-green-600 px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-green-600 hover:text-white"
-                            href="http://wa.me/2348165608778"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Build My Own Package
-                        </a>
-                    </div>
-                </motion.div>
+                    Naira figures are indicative and adjust with exchange rate. Not sure which fits?{' '}
+                    <Link href="/contact" className="font-semibold text-brand-green-deep hover:underline">
+                        Build your own package →
+                    </Link>
+                </motion.p>
             </div>
         </section>
     );

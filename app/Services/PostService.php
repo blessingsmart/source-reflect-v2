@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\DTOs\CreatePostDTO;
+use App\DTOs\UpdatePostDTO;
 use App\Models\Post;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostService
@@ -29,7 +31,8 @@ class PostService
             'slug' => $slug,
             'image_path' => $imagePath,
             'user_id' => auth()->id(),
-            'allow_comments' => $dto->allow_comments ?? true,
+            'allow_comments' => $dto->allowComments ?? true,
+            'status' => 'published',
         ]);
 
         // Sync hashtags if provided
@@ -64,7 +67,7 @@ class PostService
             'description' => $dto->description,
             'slug' => $slug,
             'image_path' => $imagePath,
-            'allow_comments' => $dto->allow_comments ?? $post->allow_comments,
+            'allow_comments' => $dto->allowComments ?? $post->allow_comments,
         ]);
 
         // Sync hashtags if provided

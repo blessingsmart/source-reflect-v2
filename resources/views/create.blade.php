@@ -319,45 +319,54 @@
   });
 
   // Enhanced image preview functionality
-  document.getElementById('imageSelected').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('imagePreview');
-    const imageInfo = document.getElementById('imageInfo');
-    const fileSize = document.getElementById('fileSize');
-    
-    if (file) {
-      // Validate file type
-      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-      if (!validTypes.includes(file.type)) {
-        alert('Please select a valid image file (JPEG, PNG, GIF, or WebP).');
-        this.value = '';
-        return;
-      }
+  const imageSelectedInput = document.getElementById('imageSelected');
+  if (imageSelectedInput) {
+    imageSelectedInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const preview = document.getElementById('imagePreview');
+      const imageInfo = document.getElementById('imageInfo');
+      const fileSize = document.getElementById('fileSize');
       
-      // Validate file size (5MB max)
-      const maxSize = 5 * 1024 * 1024; // 5MB in bytes
-      if (file.size > maxSize) {
-        alert('Image size should be less than 5MB.');
-        this.value = '';
-        return;
-      }
-      
-      const reader = new FileReader();
-      
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.classList.remove('hidden');
-        imageInfo.classList.remove('hidden');
+      if (file) {
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+          alert('Please select a valid image file (JPEG, PNG, GIF, or WebP).');
+          this.value = '';
+          return;
+        }
         
-        // Display file info
-        const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-        const dimensions = `${file.type.split('/')[1].toUpperCase()} • ${sizeInMB} MB`;
-        fileSize.textContent = dimensions;
+        // Validate file size (5MB max)
+        const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+        if (file.size > maxSize) {
+          alert('Image size should be less than 5MB.');
+          this.value = '';
+          return;
+        }
+        
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          if (preview) {
+            preview.src = e.target.result;
+            preview.classList.remove('hidden');
+          }
+          if (imageInfo) {
+            imageInfo.classList.remove('hidden');
+          }
+          
+          // Display file info
+          if (fileSize) {
+            const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+            const dimensions = `${file.type.split('/')[1].toUpperCase()} • ${sizeInMB} MB`;
+            fileSize.textContent = dimensions;
+          }
+        };
+        
+        reader.readAsDataURL(file);
       }
-      
-      reader.readAsDataURL(file);
-    }
-  });
+    });
+  }
 
   // Cancel image preview
   document.addEventListener('click', function(e) {
@@ -366,9 +375,9 @@
       const imageInfo = document.getElementById('imageInfo');
       const fileInput = document.getElementById('imageSelected');
       
-      preview.classList.add('hidden');
-      imageInfo.classList.add('hidden');
-      fileInput.value = '';
+      if (preview) preview.classList.add('hidden');
+      if (imageInfo) imageInfo.classList.add('hidden');
+      if (fileInput) fileInput.value = '';
     }
   });
 

@@ -23,7 +23,7 @@ class UpdatePostRequest extends FormRequest
     {
         return [
 
-        'title' => 'nullable|string|regex:/^[A-Za-z0-9\s]+$/|max:50|min:6',
+        'title' => 'nullable|string|regex:/^[\p{L}\p{N}\s:\;\-\/_.,!?"\'()&#]+$/u|max:150|min:6',
         'description' => 'required|string',
         'hashtag' => ['nullable', 'string', function ($attribute, $value, $fail) {
 
@@ -38,6 +38,8 @@ class UpdatePostRequest extends FormRequest
             }
           }
       }],
+        'image' => 'nullable|image|mimes:jpg,png,jpeg,webp|max:5120',
+        'allow_comments' => 'nullable|boolean',
         'enabled' => 'nullable|boolean',
         'featured' => 'nullable|boolean'
         ];
@@ -45,7 +47,7 @@ class UpdatePostRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.regex' => 'The title may only contain letters, numbers, and spaces.',
+            'title.regex' => 'The title contains invalid characters.',
         ];
     }
 }

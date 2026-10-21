@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 export default function CulturalOrientation() {
     const culturalAspects = [
         'How to navigate social customs',
-        'How to talk to police or LASTMA',
-        'How to greet elders (and when not to speak)',
-        'Where not to go (especially after dark)',
-        'How not to get scammed',
-        'What NOT to do as a foreigner or returnee',
+        'How to make your first days feel familiar',
+        'How to build local routines and relationships',
+        'Where to go and where to avoid in a new city',
+        'How to protect yourself from common scams',
+        'How to settle in with confidence, not guesswork',
     ];
 
     const addons = [
@@ -35,8 +35,10 @@ export default function CulturalOrientation() {
                     viewport={{ once: true }}
                     className="mb-16 text-center"
                 >
-                    <h2 className="mb-4 text-4xl font-bold text-gray-900">More Than Just Maps and Markets. We Help You Understand Nigeria.</h2>
-                    <p className="mx-auto max-w-4xl text-xl text-gray-600">Nigeria isn't just a place. It's a culture.</p>
+                    <h2 className="mb-4 text-4xl font-bold text-gray-900">More Than Just Maps and Markets. We Help You Understand Your New Home.</h2>
+                    <p className="mx-auto max-w-4xl text-xl text-gray-600">
+                        Whether you're moving abroad, to Nigeria, or within the country, local understanding helps you settle with confidence.
+                    </p>
                 </motion.div>
 
                 <div className="mb-16 grid gap-12 lg:grid-cols-2">

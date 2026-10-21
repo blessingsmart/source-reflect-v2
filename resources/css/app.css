@@ -8,6 +8,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+    --color-brand-green: #16A34A;
+    --color-brand-green-deep: #0F7A38;
+    --color-brand-ink: #0B1712;
+    --color-brand-gold: #D9B24C;
+    --color-brand-gold-bright: #F1CB5A;
+    --color-brand-cream: #FBFAF5;
+    --color-brand-cream-light: #F4F1E8;
+    --color-brand-text: #1B2620;
+    --color-brand-muted: #5E6B63;
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
