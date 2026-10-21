@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/setudown/setudown_app/
+    - /bin/rsync -av --exclude='.env' --exclude='node_modules' --exclude='.git' ./ $DEPLOYPATH
